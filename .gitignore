@@ -1,0 +1,10 @@
+.project
+.metadata
+bin/**
+.classpath
+.settings/
+*.class
+*.jar
+*.war
+*.ear
+*~
