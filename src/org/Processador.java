@@ -15,13 +15,15 @@ import org.instrucoes.Instrucao;
 
 public class Processador {
 	private Memoria memoria;
+	private BancodeRegistradores registradores;
 	private Instrucao[] instrucoes;
 	private Queue<Instrucao> instrucoesRestantes = new LinkedList<>();
 	private List<Instrucao> instrucoesCompletadas = new LinkedList<>();
 	private Fase[] fases;
 
-	public Processador(Memoria memoria, String[] instrucoes) {
-		this.memoria = memoria;
+	public Processador(Memoria mem, String[] instrucoes) {
+		this.memoria = mem;
+		this.registradores = new BancodeRegistradores();
 		this.instrucoes = carregarInstrucoes(instrucoes);
 		fases = construirFases();
 	}

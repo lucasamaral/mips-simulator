@@ -4,8 +4,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		String[] instrucoes = gerarAsInstrucoes();
-		Memoria mem = new Memoria();
-		Processador p = new Processador(mem, instrucoes);
+		Processador p = new Processador(new Memoria(),instrucoes);
 		p.processar();
 		System.out.println("Projeto Paulo André");
 	}
