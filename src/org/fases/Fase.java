@@ -1,4 +1,4 @@
-package org;
+package org.fases;
 import org.instrucoes.Instrucao;
 
 
