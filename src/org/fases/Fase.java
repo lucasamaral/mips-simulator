@@ -4,6 +4,9 @@ import org.instrucoes.Instrucao;
 
 
 public interface Fase {
-	public void executar(Instrucao inst);
+	public void receber(Instrucao ins);
+	public void executar();
+	public Instrucao passarInstrucao();
+	public boolean isReady();
 
 }

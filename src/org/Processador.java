@@ -1,5 +1,10 @@
 package org;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
+import org.conversorInstrucoes.ConversorInstrucoes;
 import org.fases.Executer;
 import org.fases.Fase;
 import org.fases.InstructionFetch;
@@ -11,6 +16,8 @@ import org.instrucoes.Instrucao;
 public class Processador {
 	private Memoria memoria;
 	private Instrucao[] instrucoes;
+	private Queue<Instrucao> instrucoesRestantes = new LinkedList<>();
+	private List<Instrucao> instrucoesCompletadas = new LinkedList<>();
 	private Fase[] fases;
 
 	public Processador(Memoria memoria, String[] instrucoes) {
@@ -32,22 +39,53 @@ public class Processador {
 	private Instrucao[] carregarInstrucoes(String[] novasInstrucoes) {
 		Instrucao[] inst = new Instrucao[novasInstrucoes.length];
 		for (int i = 0; i < novasInstrucoes.length; i++) {
-			inst[i] = gerarInstrucao(novasInstrucoes[i]);
+			inst[i] = ConversorInstrucoes
+					.converterInstrucao(novasInstrucoes[i]);
+			instrucoesRestantes.add(inst[i]);
 		}
 		return inst;
 	}
 
-	private Instrucao gerarInstrucao(String instrucao) {
-		// TODO Auto-generated method stub
-		return null;
+	public void step() {
+		boolean pronto = true;
+		for (Fase f : fases) {
+			if (!f.isReady()) {
+				pronto = false;
+			}
+		}
+		if (pronto) {
+			passarInstrucoes();
+		}
+		for (Fase f : fases) {
+			f.executar();
+		}
+		System.out.println("");
 	}
 
-	public void step() {
+	private void passarInstrucoes() {
+		Instrucao prox = pegarProximaInstrucao();
+		for (Fase f : fases) {
+			Instrucao temp = f.passarInstrucao();
+			f.receber(prox);
+			prox = temp;
+		}
+		if(prox!=null)
+			instrucoesCompletadas.add(prox);
+	}
 
+	private Instrucao pegarProximaInstrucao() {
+		return instrucoesRestantes.poll();
 	}
 
 	public boolean isFinished() {
-		return true;
+		if(!instrucoesRestantes.isEmpty()){
+			return false;
+		}
+		for(Fase f: fases){
+			if(!f.isReady())
+				return false;
+		}
+		return instrucoesCompletadas.size() == instrucoes.length;
 	}
 
 	public void processar() {
