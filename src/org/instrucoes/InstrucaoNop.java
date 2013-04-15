@@ -1,6 +1,10 @@
 package org.instrucoes;
 
 public class InstrucaoNop extends Instrucao {
+	public InstrucaoNop(String entrada) {
+		super(entrada);
+	}
+
 	private byte[] rs;
 	private byte[] rd;
 	private byte[] rt;

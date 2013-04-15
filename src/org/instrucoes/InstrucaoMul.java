@@ -1,6 +1,13 @@
 package org.instrucoes;
 
 public class InstrucaoMul extends Instrucao {
+	
+
+	public InstrucaoMul(String entrada) {
+		super(entrada);
+		// TODO Auto-generated constructor stub
+	}
+
 	private byte[] rs;
 	private byte[] rd;
 	private byte[] rt;

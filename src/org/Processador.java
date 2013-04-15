@@ -2,98 +2,98 @@ package org;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
-import org.conversorInstrucoes.ConversorInstrucoes;
 import org.fases.Executer;
 import org.fases.Fase;
 import org.fases.InstructionFetch;
 import org.fases.MemoryAccess;
 import org.fases.RegisterDecoder;
 import org.fases.WriteBack;
-import org.instrucoes.Instrucao;
+import org.instrucoes.InstrucaoWrapper;
+import org.latches.Latch;
+import org.latches.LatchEXMEM;
+import org.latches.LatchIDEX;
+import org.latches.LatchIFID;
+import org.latches.LatchMEMWB;
 
 public class Processador {
-	private Memoria memoria;
+	private MemoriaDados memoria;
 	private BancodeRegistradores registradores;
-	private Instrucao[] instrucoes;
-	private Queue<Instrucao> instrucoesRestantes = new LinkedList<>();
-	private List<Instrucao> instrucoesCompletadas = new LinkedList<>();
+	private MemoriaInstrucoes instrucoes;
+	private List<InstrucaoWrapper> instrucoesCompletadas = new LinkedList<>();
+	private Latch ifId;
+	private LatchIDEX idEx;
+	private LatchEXMEM exMem;
+	private LatchMEMWB memWb;
 	private Fase[] fases;
+	private boolean fimDePrograma = false;
 
-	public Processador(Memoria mem, String[] instrucoes) {
-		this.memoria = mem;
-		this.registradores = new BancodeRegistradores();
-		this.instrucoes = carregarInstrucoes(instrucoes);
+	public Processador(MemoriaDados mem, MemoriaInstrucoes ins) {
+		this.memoria = (mem);
+		this.registradores = (new BancodeRegistradores());
+		this.instrucoes = (ins);
+		construirLatches();
 		fases = construirFases();
+	}
+
+	private void construirLatches() {
+		ifId = new LatchIFID();
+		idEx = new LatchIDEX();
+		exMem = new LatchEXMEM();
+		memWb = new LatchMEMWB();
 	}
 
 	private Fase[] construirFases() {
 		Fase[] res = new Fase[5];
-		res[0] = new InstructionFetch();
-		res[1] = new RegisterDecoder();
-		res[2] = new Executer();
-		res[3] = new MemoryAccess();
-		res[4] = new WriteBack();
+		res[0] = new InstructionFetch(this, ifId);
+		res[1] = new RegisterDecoder(this, ifId, idEx);
+		res[2] = new Executer(this, idEx, exMem);
+		res[3] = new MemoryAccess(this, exMem, memWb);
+		res[4] = new WriteBack(this, memWb);
 		return res;
 	}
 
-	private Instrucao[] carregarInstrucoes(String[] novasInstrucoes) {
-		Instrucao[] inst = new Instrucao[novasInstrucoes.length];
-		for (int i = 0; i < novasInstrucoes.length; i++) {
-			inst[i] = ConversorInstrucoes
-					.converterInstrucao(novasInstrucoes[i]);
-			instrucoesRestantes.add(inst[i]);
-		}
-		return inst;
-	}
-
 	public void step() {
-		boolean pronto = true;
-		for (Fase f : fases) {
-			if (!f.isReady()) {
-				pronto = false;
-			}
+		for (int i = fases.length - 1; i >= 0; i--) {
+			fases[i].executar();
 		}
-		if (pronto) {
-			passarInstrucoes();
-		}
-		for (Fase f : fases) {
-			f.executar();
-		}
-		System.out.println("");
-	}
-
-	private void passarInstrucoes() {
-		Instrucao prox = pegarProximaInstrucao();
-		for (Fase f : fases) {
-			Instrucao temp = f.passarInstrucao();
-			f.receber(prox);
-			prox = temp;
-		}
-		if(prox!=null)
-			instrucoesCompletadas.add(prox);
-	}
-
-	private Instrucao pegarProximaInstrucao() {
-		return instrucoesRestantes.poll();
 	}
 
 	public boolean isFinished() {
-		if(!instrucoesRestantes.isEmpty()){
-			return false;
-		}
-		for(Fase f: fases){
-			if(!f.isReady())
+		for (Fase f : fases) {
+			if (!f.isReady() || f.isWorking())
 				return false;
 		}
-		return instrucoesCompletadas.size() == instrucoes.length;
+		return !idEx.hasInstruction() && !exMem.hasInstruction()
+				&& !memWb.hasInstruction() && !ifId.hasInstruction()
+				&& fimDePrograma;
 	}
 
 	public void processar() {
-		while (!isFinished()) {
+		do {
 			step();
-		}
+			System.out.println("");
+		} while (!isFinished());
+	}
+
+	public MemoriaDados getMemoria() {
+		return memoria;
+	}
+
+	public BancodeRegistradores getRegistradores() {
+		return registradores;
+	}
+
+	public MemoriaInstrucoes getInstrucoes() {
+		return instrucoes;
+	}
+
+	public boolean isFimDePrograma() {
+		return fimDePrograma;
+	}
+
+	public void sinalizarFimdePrograma() {
+		this.fimDePrograma = true;
 	}
 
 }
