@@ -14,18 +14,18 @@ import javax.swing.JPanel;
 public class Desenhador extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
-	BufferedImage screen;
-	Graphics2D graph;
-	Processador p;
+	private BufferedImage screen;
+	private Graphics2D graph;
+	private Processador p;
+	private JButton botaoProximo = new JButton("Next");
 
 	public Desenhador(Processador p) {
 		this.p = p;
-		Dimension d = new Dimension(500, 500);
+		Dimension d = new Dimension(800, 800);
 		screen = new BufferedImage((int) d.getWidth(), (int) d.getHeight(),
 				BufferedImage.TYPE_INT_RGB);
-		JButton proximo = new JButton("Next");
-		proximo.addActionListener(this);
-		add(proximo);
+		botaoProximo.addActionListener(this);
+		add(botaoProximo);
 		graph = (Graphics2D) screen.getGraphics();
 		graph.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
@@ -34,7 +34,6 @@ public class Desenhador extends JPanel implements ActionListener {
 	@Override
 	public void paint(Graphics g) {
 		desenhar(g);
-		g.drawImage(screen, 30, 20, null);
 	}
 
 	private void desenhar(Graphics g) {
@@ -44,6 +43,9 @@ public class Desenhador extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		p.step();
+		if(p.isFimDePrograma()){
+			botaoProximo.setEnabled(false);
+		}
 		repaint();
 	}
 }

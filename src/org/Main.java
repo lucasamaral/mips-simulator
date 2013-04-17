@@ -21,7 +21,7 @@ public class Main {
 		container.add(d);
 		topFrame.add(container);
 		topFrame.pack();
-		topFrame.setSize(new Dimension(500, 500));
+		topFrame.setSize(new Dimension(800, 600));
 		topFrame.setVisible(true);
 		System.out.println("Projeto Paulo André");
 	}
