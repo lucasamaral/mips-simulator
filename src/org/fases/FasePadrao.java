@@ -8,30 +8,34 @@ public abstract class FasePadrao implements Fase {
 	protected InstrucaoWrapper instrucaoAtual;
 	private Processador processador;
 
-	public FasePadrao(Processador p){
+	public FasePadrao(Processador p) {
 		processador = p;
 	}
-	
-	public String getNomeFase(){
-			return this.getClass().getName();
+
+	public String getNomeFase() {
+		return this.getClass().getName();
 	}
 
 	@Override
-	public void executar() {
+	public void executarPasso1() {
+	}
+
+	@Override
+	public void executarPasso2() {
 		System.out.println(this + " executando instrucao " + instrucaoAtual);
 	}
 
-	public Processador getProcessador(){
+	public Processador getProcessador() {
 		return this.processador;
 	}
-	
+
 	@Override
 	public boolean isReady() {
 		return true;
 	}
-	
-	public boolean isWorking(){
-		return instrucaoAtual!=null;
+
+	public boolean isWorking() {
+		return instrucaoAtual != null;
 	}
 
 }

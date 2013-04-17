@@ -17,11 +17,17 @@ public class Executer extends FasePadrao {
 	}
 	
 	@Override
-	public void executar(){
+	public void executarPasso1(){
 		instrucaoAtual = idEx.pegarInstrucao();
-		super.executar();
+		super.executarPasso1();
+	}
+	
+	@Override
+	public void executarPasso2() {
+		super.executarPasso2();
 		exMem.adicionarInstrucao(instrucaoAtual);
 		instrucaoAtual = null;
 	}
+
 
 }

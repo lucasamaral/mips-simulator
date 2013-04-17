@@ -16,7 +16,7 @@ public class InstructionFetch extends FasePadrao {
 	}
 
 	@Override
-	public void executar() {
+	public void executarPasso1() {
 		String dadosInstrucao = null;
 		try {
 			dadosInstrucao = this.getProcessador().getInstrucoes()
@@ -28,7 +28,11 @@ public class InstructionFetch extends FasePadrao {
 		}
 		pc += 4;
 		instrucaoAtual = new InstrucaoWrapper(dadosInstrucao);
-		super.executar();
+		instrucaoAtual.setInstrucaoReal(ConversorInstrucoes.converterInstrucao(instrucaoAtual.getDado()));
+	}
+	
+	public void executarPasso2(){
+		super.executarPasso2();
 		processar(instrucaoAtual);
 		ifId.adicionarInstrucao(instrucaoAtual);
 		instrucaoAtual = null;

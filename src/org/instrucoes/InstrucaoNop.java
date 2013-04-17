@@ -3,6 +3,7 @@ package org.instrucoes;
 public class InstrucaoNop extends Instrucao {
 	public InstrucaoNop(String entrada) {
 		super(entrada);
+		tipo = TipoInstrucao.NOP;
 	}
 
 	private byte[] rs;

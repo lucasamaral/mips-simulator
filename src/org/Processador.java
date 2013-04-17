@@ -55,7 +55,10 @@ public class Processador {
 
 	public void step() {
 		for (int i = fases.length - 1; i >= 0; i--) {
-			fases[i].executar();
+			fases[i].executarPasso1();
+		}
+		for (int i = fases.length - 1; i >= 0; i--) {
+			fases[i].executarPasso2();
 		}
 	}
 

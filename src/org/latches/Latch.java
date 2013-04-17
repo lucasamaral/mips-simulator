@@ -7,6 +7,7 @@ public class Latch {
 	InstrucaoWrapper instrucaoNoBuffer;
 
 	public void adicionarInstrucao(InstrucaoWrapper instrucaoAtual) {
+		// TODO: Alguem tem que esperar caso o Buffer esteja ocupado
 		instrucaoNoBuffer = instrucaoAtual;
 	}
 
@@ -15,9 +16,9 @@ public class Latch {
 		instrucaoNoBuffer = null;
 		return temp;
 	}
-	
+
 	public boolean hasInstruction() {
-		return instrucaoNoBuffer!=null;
+		return instrucaoNoBuffer != null;
 	}
 
 }

@@ -5,7 +5,7 @@ public class InstrucaoMul extends Instrucao {
 
 	public InstrucaoMul(String entrada) {
 		super(entrada);
-		// TODO Auto-generated constructor stub
+		tipo = TipoInstrucao.MUL;
 	}
 
 	private byte[] rs;

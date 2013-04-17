@@ -13,9 +13,15 @@ public class WriteBack extends FasePadrao {
 	}
 
 	@Override
-	public void executar(){
+	public void executarPasso1(){
 		instrucaoAtual = memWb.pegarInstrucao();
-		super.executar();
-		instrucaoAtual = null;
+		super.executarPasso1();
 	}
+	
+	@Override
+	public void executarPasso2() {
+		instrucaoAtual = null;
+		super.executarPasso2();
+	}
+
 }

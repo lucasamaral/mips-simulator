@@ -16,9 +16,14 @@ public class MemoryAccess extends FasePadrao {
 	}
 
 	@Override
-	public void executar() {
+	public void executarPasso1() {
 		instrucaoAtual = exMem.pegarInstrucao();
-		super.executar();
+		super.executarPasso1();
+	}
+	
+	@Override
+	public void executarPasso2() {
+		super.executarPasso2();
 		memWb.adicionarInstrucao(instrucaoAtual);
 		instrucaoAtual = null;
 	}
