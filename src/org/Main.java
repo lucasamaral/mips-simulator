@@ -1,12 +1,28 @@
 package org;
 
+import java.awt.Dimension;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 public class Main {
+
+	public static JPanel container;
 
 	public static void main(String[] args) {
 		String[] instrucoes = gerarAsInstrucoes();
 		MemoriaInstrucoes memIns = new MemoriaInstrucoes(instrucoes);
-		Processador p = new Processador(new MemoriaDados(),memIns);
-		p.processar();
+		Processador p = new Processador(new MemoriaDados(), memIns);
+		Desenhador d = new Desenhador(p);
+		JFrame topFrame = criaFrame();
+		container = new JPanel();
+		container.add(d);
+		topFrame.add(container);
+		topFrame.pack();
+		topFrame.setSize(new Dimension(500, 500));
+		topFrame.setVisible(true);
 		System.out.println("Projeto Paulo André");
 	}
 
@@ -23,5 +39,24 @@ public class Main {
 				"00100000110001100000000000000001			; I9: addi R6,R6,1",
 				"10101100000001100000000000011100			; I10: sw R6,28(R0)",
 				"00011100110010100000000000001100			; I11: ble R6,R10,12" };
+	}
+
+	private static JFrame criaFrame() {
+		JFrame f = new JFrame("MIPS Simulator");
+		f.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+
+			@Override
+			public void windowDeiconified(WindowEvent e) {
+			}
+
+			@Override
+			public void windowIconified(WindowEvent e) {
+			}
+		});
+		return f;
 	}
 }
