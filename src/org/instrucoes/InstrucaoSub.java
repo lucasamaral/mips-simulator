@@ -1,5 +1,7 @@
 package org.instrucoes;
 
+import org.Processador;
+
 public class InstrucaoSub extends Instrucao {
 
 	private byte[] rs;
@@ -14,7 +16,7 @@ public class InstrucaoSub extends Instrucao {
 	}
 
 	@Override
-	public void executar() {
+	public void executar(Processador proc) {
 		// TODO Auto-generated method stub
 
 	}

@@ -1,5 +1,7 @@
 package org.instrucoes;
 
+import org.Processador;
+
 
 
 
@@ -13,5 +15,5 @@ public abstract class Instrucao {
 		dados = entrada;
 	}
 	
-	public abstract void executar();
+	public abstract void executar(Processador proc);
 }

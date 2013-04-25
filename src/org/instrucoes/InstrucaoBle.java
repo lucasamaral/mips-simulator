@@ -1,5 +1,7 @@
 package org.instrucoes;
 
+import org.Processador;
+
 public class InstrucaoBle extends Instrucao {
 
 	public InstrucaoBle(String entrada) {
@@ -8,7 +10,7 @@ public class InstrucaoBle extends Instrucao {
 	}
 
 	@Override
-	public void executar() {
+	public void executar(Processador proc) {
 		// TODO Auto-generated method stub
 
 	}

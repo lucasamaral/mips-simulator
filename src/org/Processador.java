@@ -18,7 +18,7 @@ import org.latches.LatchMEMWB;
 
 public class Processador {
 	private MemoriaDados memoria;
-	private BancodeRegistradores registradores;
+	private BancoDeRegistradores registradores;
 	private MemoriaInstrucoes instrucoes;
 	private List<InstrucaoWrapper> instrucoesCompletadas = new LinkedList<>();
 	private Latch ifId;
@@ -30,7 +30,7 @@ public class Processador {
 
 	public Processador(MemoriaDados mem, MemoriaInstrucoes ins) {
 		this.memoria = (mem);
-		this.registradores = (new BancodeRegistradores());
+		this.registradores = (new BancoDeRegistradores());
 		this.instrucoes = (ins);
 		construirLatches();
 		fases = construirFases();
@@ -83,7 +83,7 @@ public class Processador {
 		return memoria;
 	}
 
-	public BancodeRegistradores getRegistradores() {
+	public BancoDeRegistradores getRegistradores() {
 		return registradores;
 	}
 

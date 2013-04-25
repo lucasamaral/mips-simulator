@@ -1,5 +1,7 @@
 package org.instrucoes;
 
+import org.Processador;
+
 public class InstrucaoNop extends Instrucao {
 	public InstrucaoNop(String entrada) {
 		super(entrada);
@@ -13,7 +15,7 @@ public class InstrucaoNop extends Instrucao {
 	private byte[] funct;
 	
 	@Override
-	public void executar() {
+	public void executar(Processador proc) {
 		// TODO Implementar a soma: rs = rd+rt
 
 	}
