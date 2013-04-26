@@ -23,12 +23,14 @@ public class InstrucaoBle extends InstrucaoItype {
 	public boolean getCondicaoULA(Processador proc) {
 		int rsValue = proc.pegardosRegistradores(rsCode);
 		int rtValue = proc.pegardosRegistradores(rtCode);
-		return rsValue<=rtValue;
+		return rsValue <= rtValue;
 	}
 
 	@Override
 	public int getResultadoULAEndereco(Processador proc) {
-		return proc.getPc() + Integer.parseInt(immCode, 2);
+		// Temporariamente mudando para seguir a documentacao do PA. Eu acho que
+		// o certo era ser relativo mesmo
+		return Integer.parseInt(immCode, 2);
 	}
 
 }

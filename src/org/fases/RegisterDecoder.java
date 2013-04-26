@@ -20,16 +20,18 @@ public class RegisterDecoder extends FasePadrao {
 	@Override
 	public void executarPasso1() {
 	}
-	
+
 	@Override
 	public void executarPasso2() {
 		idEx.adicionarInstrucao(instrucaoAtual);
-		//adicionado por Assis
-		if(instrucaoAtual.getCodigo().equals(CodigoInstrucao.SW)){
+		// adicionado por Assis
+		if (instrucaoAtual != null
+				&& instrucaoAtual.getCodigo().equals(CodigoInstrucao.SW)) {
 			InstrucaoSw instSw = (InstrucaoSw) instrucaoAtual.getInstrucao();
-			idEx.setValorLidoRtParaSalvarNaMemoria(processador.pegardosRegistradores(instSw.getValorRtCode()));
+			idEx.setValorLidoRtParaSalvarNaMemoria(processador
+					.pegardosRegistradores(instSw.getValorRtCode()));
 		}
-		//até aqui
+		// até aqui
 		instrucaoAtual = null;
 	}
 

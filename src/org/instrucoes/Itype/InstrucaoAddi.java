@@ -11,13 +11,15 @@ public class InstrucaoAddi extends InstrucaoItype {
 	}
 
 	@Override
-	public void writeBack(Processador banco,int valorULA, int valorMem) {
+	public void writeBack(Processador banco, int valorULA, int valorMem) {
+		System.out.println("Da ULA vem " + valorULA);
 		banco.carregarNosRegistradores(rtCode, valorULA);
 	}
 
 	@Override
 	public int getResultadoULA(Processador proc) {
-		int soma = proc.pegardosRegistradores(rsCode) + Integer.parseInt(immCode, 2);
+		int soma = proc.pegardosRegistradores(rsCode)
+				+ Integer.parseInt(immCode, 2);
 		return soma;
 	}
 

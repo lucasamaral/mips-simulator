@@ -1,6 +1,6 @@
 package org.latches;
 
-public class LatchEXMEM extends Latch{
+public class LatchEXMEM extends Latch {
 
 	private boolean zeroULA;
 	private int possivelProximoEndereco;
@@ -21,7 +21,7 @@ public class LatchEXMEM extends Latch{
 
 	public void setResultadoULA(int resultadoULA) {
 		this.resultadoULA = resultadoULA;
-		
+
 	}
 
 	public void setZeroULA(boolean condicaoULA) {
@@ -38,6 +38,15 @@ public class LatchEXMEM extends Latch{
 
 	public void setValorEscreverNaMemoria(int valorLidoDeRt) {
 		this.valorEscreverNaMemoria = valorLidoDeRt;
+	}
+
+	@Override
+	public void limpar() {
+		super.limpar();
+		zeroULA = false;
+		possivelProximoEndereco = 0;
+		resultadoULA = 0;
+		valorEscreverNaMemoria = 0;
 	}
 
 }

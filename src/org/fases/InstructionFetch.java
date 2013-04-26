@@ -27,7 +27,6 @@ public class InstructionFetch extends FasePadrao {
 			dadosInstrucao = this.getProcessador().getInstrucoes()
 					.getInstrucao(internalPc);
 		} catch (ArrayIndexOutOfBoundsException e) {
-			processador.sinalizarFimdePrograma();
 			return;
 		}
 		instrucaoAtual = new InstrucaoWrapper(dadosInstrucao);

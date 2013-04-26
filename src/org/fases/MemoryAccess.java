@@ -39,13 +39,16 @@ public class MemoryAccess extends FasePadrao {
 			}
 		}
 		memWb.setResultadoULA(resultadoULA);
-		if (instrucaoAtual != null && instrucaoAtual.isBranch()
-				&& exMem.getZeroULA()) {
-			processador.setPc(possivelProximoEndereco);
+		if (instrucaoAtual != null && instrucaoAtual.isBranch() && zeroULA) {
+			fazerSalto();
 		} else {
 			processador.incrementarPC();
 		}
 		instrucaoAtual = null;
+	}
+
+	private void fazerSalto() {
+		processador.executarSalto(possivelProximoEndereco);
 	}
 
 	@Override

@@ -79,7 +79,7 @@ public class Processador {
 		for (Fase f : fases) {
 			f.executarPasso2();
 		}
-		System.out.println(clockCount++);
+		clockCount++;
 		System.out.println(pc);
 	}
 
@@ -90,7 +90,7 @@ public class Processador {
 		}
 		return !idEx.hasInstruction() && !exMem.hasInstruction()
 				&& !memWb.hasInstruction() && !ifId.hasInstruction()
-				&& fimDePrograma;
+				&& pc >= instrucoes.limiteInstrucoes();
 	}
 
 	public void processar() {
@@ -102,10 +102,6 @@ public class Processador {
 
 	public MemoriaInstrucoes getInstrucoes() {
 		return instrucoes;
-	}
-
-	public boolean isFimDePrograma() {
-		return fimDePrograma;
 	}
 
 	public void sinalizarFimdePrograma() {
@@ -166,12 +162,23 @@ public class Processador {
 			writer.write("Estado final dos registradores:");
 			writer.newLine();
 			for (int end = 0; end < 32; end++) {
-				writer.write("" + end + " - " + registradores.readRegister(Integer.toBinaryString(end)));
+				writer.write(""
+						+ end
+						+ " - "
+						+ registradores.readRegister(Integer
+								.toBinaryString(end)));
 				writer.newLine();
 			}
 		} catch (IOException e) {
 			// TODO: handle exception
 		}
+	}
+
+	public void executarSalto(int proximoEndereco) {
+		ifId.limpar();
+		idEx.limpar();
+		exMem.limpar();
+		setPc(proximoEndereco);
 	}
 
 }

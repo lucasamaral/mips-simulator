@@ -11,5 +11,9 @@ public class MemoriaInstrucoes {
 	public String getInstrucao(int endereco){
 		return instrucoes[endereco/4];
 	}
+	
+	public int limiteInstrucoes(){
+		return instrucoes.length;
+	}
 
 }

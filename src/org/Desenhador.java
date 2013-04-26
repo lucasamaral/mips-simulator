@@ -42,7 +42,11 @@ public class Desenhador extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		p.step();
+		int i=0;
+		while(i < 15 && !p.isFinished()){
+			p.step();
+			i++;
+		}
 		if(p.isFinished()){
 			botaoProximo.setEnabled(false);
 		}

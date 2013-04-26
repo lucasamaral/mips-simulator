@@ -6,6 +6,8 @@ import org.latches.LatchMEMWB;
 public class WriteBack extends FasePadrao {
 
 	private LatchMEMWB memWb;
+	private int resultadoULA;
+	private int resultadoMem;
 
 	public WriteBack(Processador p,LatchMEMWB memWb) {
 		super(p);
@@ -19,7 +21,7 @@ public class WriteBack extends FasePadrao {
 	@Override
 	public void executarPasso2() {
 		if(instrucaoAtual!=null){
-			instrucaoAtual.writeBack(processador,memWb.getResultadoULA(),memWb.getResultadoMem());
+			instrucaoAtual.writeBack(processador,resultadoULA,resultadoMem);
 		}
 		processador.adicionarInstrucaoCompletada(instrucaoAtual);
 		instrucaoAtual = null;
@@ -28,6 +30,8 @@ public class WriteBack extends FasePadrao {
 	@Override
 	public void carregarSinais() {
 		instrucaoAtual = memWb.pegarInstrucao();
+		resultadoULA = memWb.getResultadoULA();
+		resultadoMem = memWb.getResultadoMem();
 	}
 
 }

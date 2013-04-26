@@ -20,5 +20,9 @@ public class Latch {
 	public boolean hasInstruction() {
 		return instrucaoNoBuffer != null;
 	}
+	
+	public void limpar(){
+		instrucaoNoBuffer = null;
+	}
 
 }

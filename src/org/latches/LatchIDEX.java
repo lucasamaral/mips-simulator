@@ -11,4 +11,10 @@ public class LatchIDEX extends Latch {
 		this.valorLidoRtParaSalvarNaMemoria = valorLidoRt;
 	}
 
+	@Override
+	public void limpar() {
+		super.limpar();
+		valorLidoRtParaSalvarNaMemoria = 0;
+	}
+
 }
