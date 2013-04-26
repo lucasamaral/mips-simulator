@@ -1,8 +1,9 @@
-package org.instrucoes;
+package org.instrucoes.Itype;
 
 import org.Processador;
+import org.instrucoes.CodigoInstrucao;
 
-public class InstrucaoBne extends Instrucao {
+public class InstrucaoBne extends InstrucaoItype {
 
 	public InstrucaoBne(String entrada) {
 		super(entrada);

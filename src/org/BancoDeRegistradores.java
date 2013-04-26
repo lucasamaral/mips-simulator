@@ -1,5 +1,6 @@
 package org;
 
+
 public class BancoDeRegistradores {
 	
 	private int R0;
@@ -29,7 +30,7 @@ public class BancoDeRegistradores {
 		R15 = 0; R16 = 0;
 	}
 	
-	public void writeRegister(String regNumber, int value) throws Exception{
+	public void writeRegister(String regNumber, int value){
 		switch (regNumber) {
 		case "00000":
 			R0 = value;
@@ -83,11 +84,11 @@ public class BancoDeRegistradores {
 			R16 = value;
 			break;
 		default:
-			throw new Exception("Valor inválido de registrador");
+			throw new RuntimeException("Valor inválido de registrador");
 		}
 	}
 	
-	public int readRegister(String regNumber) throws Exception{
+	public int readRegister(String regNumber){
 		switch (regNumber) {
 		case "00000":
 			return R0;
@@ -124,7 +125,7 @@ public class BancoDeRegistradores {
 		case "10000":
 			return R16;
 		default:
-			throw new Exception("Valor inválido de registrador");
+			throw new RuntimeException("Valor inválido de registrador");
 		}
 	}
 }

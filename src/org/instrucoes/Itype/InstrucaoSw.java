@@ -1,9 +1,10 @@
-package org.instrucoes;
+package org.instrucoes.Itype;
 
 import org.Processador;
+import org.instrucoes.CodigoInstrucao;
 
 
-public class InstrucaoSw extends Instrucao {
+public class InstrucaoSw extends InstrucaoItype {
 
 	public InstrucaoSw(String entrada) {
 		super(entrada);

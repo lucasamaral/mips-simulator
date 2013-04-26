@@ -1,14 +1,9 @@
-package org.instrucoes;
+package org.instrucoes.Rtype;
 
 import org.Processador;
+import org.instrucoes.CodigoInstrucao;
 
-public class InstrucaoSub extends Instrucao {
-
-	private byte[] rs;
-	private byte[] rd;
-	private byte[] rt;
-	private byte[] shamt;
-	private byte[] funct;
+public class InstrucaoSub extends InstrucaoRtype {
 
 	public InstrucaoSub(String entrada) {
 		super(entrada);

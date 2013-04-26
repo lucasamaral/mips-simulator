@@ -11,7 +11,16 @@ public abstract class InstrucaoRtype extends Instrucao {
 	protected String rsCode;
 	protected String rtCode;
 	protected String rdCode;
-		
+	
+	public InstrucaoRtype(String entrada) {
+		super(entrada);
+		tipo = TipoInstrucao.RTYPE;
+		codigo = CodigoInstrucao.ADD;
+		rsCode = dados.substring(6, 11);
+		rtCode = dados.substring(11, 16);
+		rdCode = dados.substring(16, 21);
+	}
+	
 	public String getRsCode() {
 		return rsCode;
 	}
@@ -32,15 +41,6 @@ public abstract class InstrucaoRtype extends Instrucao {
 
 	public String getRdCode() {
 		return rdCode;
-	}
-
-	public InstrucaoRtype(String entrada) {
-		super(entrada);
-		tipo = TipoInstrucao.RTYPE;
-		codigo = CodigoInstrucao.ADD;
-		rsCode = dados.substring(6, 11);
-		rtCode = dados.substring(11, 16);
-		rdCode = dados.substring(16, 21);
 	}
 
 }

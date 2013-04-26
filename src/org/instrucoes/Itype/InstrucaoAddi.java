@@ -2,11 +2,13 @@ package org.instrucoes.Itype;
 
 import org.BancoDeRegistradores;
 import org.Processador;
+import org.instrucoes.CodigoInstrucao;
 
 public class InstrucaoAddi extends InstrucaoItype {
 
 	public InstrucaoAddi(String entrada) {
 		super(entrada);
+		codigo = CodigoInstrucao.ADDI;
 	}
 
 	@Override
@@ -14,13 +16,8 @@ public class InstrucaoAddi extends InstrucaoItype {
 		// Calcular rt = rs + int(imm)
 		BancoDeRegistradores banco = proc.getRegistradores();
 		int soma;
-		try {
-			soma  = banco.readRegister(rsCode)+Integer.parseInt(immCode, 2);
-			resultado = soma;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
+		soma = banco.readRegister(rsCode) + Integer.parseInt(immCode, 2);
+		resultado = soma;
 
 	}
 
