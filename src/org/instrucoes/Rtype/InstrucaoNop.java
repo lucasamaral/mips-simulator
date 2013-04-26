@@ -1,19 +1,15 @@
-package org.instrucoes;
+package org.instrucoes.Rtype;
 
 import org.Processador;
+import org.instrucoes.TipoInstrucao;
 
-public class InstrucaoNop extends Instrucao {
+public class InstrucaoNop extends InstrucaoRtype {
+
 	public InstrucaoNop(String entrada) {
 		super(entrada);
 		tipo = TipoInstrucao.NOP;
 	}
 
-	private byte[] rs;
-	private byte[] rd;
-	private byte[] rt;
-	private byte[] shamt;
-	private byte[] funct;
-	
 	@Override
 	public void executar(Processador proc) {
 		// TODO Implementar a soma: rs = rd+rt

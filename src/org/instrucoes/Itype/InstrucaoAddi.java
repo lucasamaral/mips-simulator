@@ -2,11 +2,13 @@ package org.instrucoes.Itype;
 
 import org.BancoDeRegistradores;
 import org.Processador;
+import org.instrucoes.TipoInstrucao;
 
 public class InstrucaoAddi extends InstrucaoItype {
 
 	public InstrucaoAddi(String entrada) {
 		super(entrada);
+		tipo = TipoInstrucao.ADDI;
 	}
 
 	@Override

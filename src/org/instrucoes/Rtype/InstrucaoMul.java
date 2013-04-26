@@ -2,11 +2,13 @@ package org.instrucoes.Rtype;
 
 import org.BancoDeRegistradores;
 import org.Processador;
+import org.instrucoes.TipoInstrucao;
 
 public class InstrucaoMul extends InstrucaoRtype {
 
 	public InstrucaoMul(String entrada) {
 		super(entrada);
+		tipo = TipoInstrucao.MUL;
 	}
 	
 	@Override
