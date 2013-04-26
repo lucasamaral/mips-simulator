@@ -1,5 +1,6 @@
 package org;
 
+
 public class BancoDeRegistradores {
 	
 	private int R0;
@@ -83,7 +84,7 @@ public class BancoDeRegistradores {
 			R16 = value;
 			break;
 		default:
-			throw new Exception("Valor inválido de registrador");
+			throw new RuntimeException("Valor inválido de registrador");
 		}
 	}
 	
@@ -124,7 +125,7 @@ public class BancoDeRegistradores {
 		case "10000":
 			return R16;
 		default:
-			throw new Exception("Valor inválido de registrador");
+			throw new RuntimeException("Valor inválido de registrador");
 		}
 	}
 }

@@ -28,11 +28,7 @@ public class InstructionFetch extends FasePadrao {
 		}
 		pc += 4;
 		instrucaoAtual = new InstrucaoWrapper(dadosInstrucao);
-		try {
-			instrucaoAtual.setInstrucaoReal(ConversorInstrucoes.converterInstrucao(instrucaoAtual.getDado()));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		instrucaoAtual.setInstrucaoReal(ConversorInstrucoes.converterInstrucao(instrucaoAtual.getDado()));
 	}
 	
 	public void executarPasso2(){

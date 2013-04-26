@@ -16,13 +16,8 @@ public class InstrucaoAddi extends InstrucaoItype {
 		// Calcular rt = rs + int(imm)
 		BancoDeRegistradores banco = proc.getRegistradores();
 		int soma;
-		try {
-			soma  = banco.readRegister(rsCode)+Integer.parseInt(immCode, 2);
-			resultado = soma;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
+		soma = banco.readRegister(rsCode) + Integer.parseInt(immCode, 2);
+		resultado = soma;
 
 	}
 

@@ -43,7 +43,7 @@ public class ConversorInstrucoes {
 		case "101011":
 			return new InstrucaoSw(instrucao);
 		default:
-			throw new Exception("Instrução com código não suportado");
+			throw new RuntimeException("Instrução com código não suportado");
 		}
 	}
 
