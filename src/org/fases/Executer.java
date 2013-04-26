@@ -25,9 +25,9 @@ public class Executer extends FasePadrao {
 	public void executarPasso2() {
 		exMem.adicionarInstrucao(instrucaoAtual);
 		instrucaoAtual = null;
-		exMem.setResultadoULA(instrucaoAtual.getResultadoULA());
-		exMem.setZeroULA(instrucaoAtual.getCondicaoULA());
-		exMem.setEnderecoSomado(instrucaoAtual.getResultadoULAEndereco());
+		exMem.setResultadoULA(instrucaoAtual.getResultadoULA(processador));
+		exMem.setZeroULA(instrucaoAtual.getCondicaoULA(processador));
+		exMem.setEnderecoSomado(instrucaoAtual.getResultadoULAEndereco(processador));
 	}
 
 	@Override

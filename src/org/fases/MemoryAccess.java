@@ -28,8 +28,7 @@ public class MemoryAccess extends FasePadrao {
 			switch (instrucaoAtual.getCodigo()) {
 			case SW:
 				InstrucaoSw inss = (InstrucaoSw) instrucaoAtual.getInstrucao();
-				processador.carregarNaMemoria(exMem.getResultadoULA(),
-						inss.getValorRtCode());
+				inss.memory(exMem, processador);
 			case LW:
 				memWb.setResultadoMem(processador.pegarDaMemoria(exMem
 						.getResultadoULA()));

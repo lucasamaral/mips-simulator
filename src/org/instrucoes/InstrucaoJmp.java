@@ -24,7 +24,7 @@ public class InstrucaoJmp extends Instrucao {
 
 	@Override
 	public boolean getCondicaoULA(Processador proc) {
-		return false;
+		return true;
 	}
 
 	@Override
