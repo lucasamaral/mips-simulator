@@ -1,5 +1,7 @@
 package org.instrucoes;
 
+import java.util.List;
+
 import org.Processador;
 
 public abstract class Instrucao {
@@ -30,4 +32,8 @@ public abstract class Instrucao {
 	public abstract boolean getCondicaoULA(Processador proc);
 
 	public abstract int getResultadoULAEndereco(Processador proc);
+
+	public abstract List<Integer> getDependenciasWrite();
+
+	public abstract List<Integer> getDependenciasRead();
 }

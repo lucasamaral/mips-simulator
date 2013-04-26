@@ -1,5 +1,8 @@
 package org.instrucoes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.Processador;
 
 
@@ -29,6 +32,16 @@ public class InstrucaoJmp extends Instrucao {
 	@Override
 	public int getResultadoULAEndereco(Processador proc) {
 		return Integer.parseInt(immCode, 2);
+	}
+
+	@Override
+	public List<Integer> getDependenciasWrite() {
+		return new ArrayList<>();
+	}
+
+	@Override
+	public List<Integer> getDependenciasRead() {
+		return new ArrayList<>();
 	}
 
 }

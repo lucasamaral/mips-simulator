@@ -8,6 +8,7 @@ public class Executer extends FasePadrao {
 
 	private LatchIDEX idEx;
 	private LatchEXMEM exMem;
+	private int valorLidoRtParaSalvarNaMemoria;
 
 	public Executer(Processador p, LatchIDEX idEx, LatchEXMEM exMem) {
 		super(p);
@@ -28,7 +29,7 @@ public class Executer extends FasePadrao {
 			exMem.setEnderecoSomado(instrucaoAtual
 					.getResultadoULAEndereco(processador));
 			//Adicionado por Assis
-			exMem.setValorEscreverNaMemoria(idEx.getValorLidoRtParaSalvarNaMemoria());
+			exMem.setValorEscreverNaMemoria(valorLidoRtParaSalvarNaMemoria);
 		}
 		instrucaoAtual = null;
 	}
@@ -36,6 +37,7 @@ public class Executer extends FasePadrao {
 	@Override
 	public void carregarSinais() {
 		instrucaoAtual = idEx.pegarInstrucao();
+		valorLidoRtParaSalvarNaMemoria = idEx.getValorLidoRtParaSalvarNaMemoria();
 	}
 
 }

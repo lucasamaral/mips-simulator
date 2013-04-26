@@ -1,5 +1,7 @@
 package org.instrucoes;
 
+import java.util.List;
+
 import org.Processador;
 
 public class InstrucaoWrapper {
@@ -56,5 +58,12 @@ public class InstrucaoWrapper {
 	public int getResultadoULAEndereco(Processador proc) {
 		return instrucao.getResultadoULAEndereco(proc);
 	}
+
+	public List<Integer> getDependenciasWrite() {
+		return instrucao.getDependenciasWrite();
+	}
 	
+	public List<Integer> getDependenciasRead() {
+		return instrucao.getDependenciasRead();
+	}
 }

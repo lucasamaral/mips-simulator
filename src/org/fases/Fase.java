@@ -1,5 +1,7 @@
 package org.fases;
 
+import org.instrucoes.InstrucaoWrapper;
+
 public interface Fase {
 
 	public boolean isReady();
@@ -11,5 +13,7 @@ public interface Fase {
 	public void executarPasso2();
 
 	public void carregarSinais();
+
+	public InstrucaoWrapper getInstrucaoAtual();
 
 }

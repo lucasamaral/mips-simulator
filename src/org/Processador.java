@@ -7,8 +7,10 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.fases.Executer;
 import org.fases.Fase;
@@ -26,6 +28,7 @@ public class Processador {
 
 	private CentralSinais centralSinais;
 	private int pc;
+	private Map<Integer, Integer> dependencias = new HashMap<>();
 	private MemoriaDados memoria;
 	private BancoDeRegistradores registradores;
 	private MemoriaInstrucoes instrucoes;
@@ -37,6 +40,7 @@ public class Processador {
 	private LatchMEMWB memWb;
 	private Fase[] fases;
 	private boolean fimDePrograma = false;
+	private boolean temDependencia;
 
 	public Processador(MemoriaDados mem, MemoriaInstrucoes ins) {
 		this.memoria = (mem);
@@ -70,6 +74,9 @@ public class Processador {
 	}
 
 	public void step() {
+		for (Integer registrador : dependencias.keySet()) {
+			dependencias.put(registrador, dependencias.get(registrador) - 1);
+		}
 		for (Fase f : fases) {
 			f.carregarSinais();
 		}
@@ -77,6 +84,7 @@ public class Processador {
 			f.executarPasso1();
 		}
 		for (Fase f : fases) {
+			System.out.println(f + " -" + f.getInstrucaoAtual());
 			f.executarPasso2();
 		}
 		clockCount++;
@@ -117,6 +125,14 @@ public class Processador {
 	}
 
 	public boolean temDependencia(InstrucaoWrapper instrucaoAtual) {
+		for (Integer p : instrucaoAtual.getDependenciasRead()) {
+			if (dependencias.containsKey(p) && dependencias.get(p) > 0){
+				System.out.println("Opa, tem dependencia");
+				temDependencia = true;
+				return true;
+			}
+		}
+		temDependencia = false;
 		return false;
 	}
 
@@ -137,7 +153,10 @@ public class Processador {
 	}
 
 	public void incrementarPC() {
-		pc = pc + 4;
+		if(!temDependencia)
+			pc = pc + 4;
+		else
+			temDependencia = false;
 	}
 
 	public void gerarLog() {
@@ -147,7 +166,6 @@ public class Processador {
 			writer.write("Instrucoes executadas:");
 			writer.newLine();
 			for (InstrucaoWrapper line : instrucoesCompletadas) {
-				System.out.println(line);
 				writer.write(line.toString());
 				writer.newLine();
 			}
@@ -179,6 +197,19 @@ public class Processador {
 		idEx.limpar();
 		exMem.limpar();
 		setPc(proximoEndereco);
+	}
+
+	public void notificarEntrada(InstrucaoWrapper instrucaoAtual) {
+		if (instrucaoAtual.getDependenciasWrite().size() > 0) {
+			switch (instrucaoAtual.getCodigo()) {
+			case LW:
+				dependencias.put(instrucaoAtual.getDependenciasWrite().get(0),
+						4);
+			default:
+				dependencias.put(instrucaoAtual.getDependenciasWrite().get(0),
+						4);
+			}
+		}
 	}
 
 }

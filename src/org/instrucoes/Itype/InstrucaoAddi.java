@@ -1,5 +1,8 @@
 package org.instrucoes.Itype;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.Processador;
 import org.instrucoes.CodigoInstrucao;
 
@@ -9,10 +12,23 @@ public class InstrucaoAddi extends InstrucaoItype {
 		super(entrada);
 		codigo = CodigoInstrucao.ADDI;
 	}
+	
+	@Override
+	public List<Integer> getDependenciasWrite() {
+		List<Integer> lista = new ArrayList<>(3);
+		lista.add(Integer.parseInt(rtCode, 2));
+		return lista;
+	}
+
+	@Override
+	public List<Integer> getDependenciasRead() {
+		List<Integer> lista = new ArrayList<>(3);
+		lista.add(Integer.parseInt(rsCode, 2));
+		return lista;
+	}
 
 	@Override
 	public void writeBack(Processador banco, int valorULA, int valorMem) {
-		System.out.println("Da ULA vem " + valorULA);
 		banco.carregarNosRegistradores(rtCode, valorULA);
 	}
 
@@ -20,6 +36,9 @@ public class InstrucaoAddi extends InstrucaoItype {
 	public int getResultadoULA(Processador proc) {
 		int soma = proc.pegardosRegistradores(rsCode)
 				+ Integer.parseInt(immCode, 2);
+		System.out.println("Dos registradores: "+proc.pegardosRegistradores(rsCode));
+		System.out.println("Do immediate: " + Integer.parseInt(immCode, 2));
+		System.out.println("Soma: "+soma);
 		return soma;
 	}
 

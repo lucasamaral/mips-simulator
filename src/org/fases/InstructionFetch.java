@@ -14,9 +14,9 @@ public class InstructionFetch extends FasePadrao {
 		super(p);
 		this.ifId = ifId;
 	}
-	
+
 	@Override
-	public void carregarSinais(){
+	public void carregarSinais() {
 		internalPc = processador.getPc();
 	}
 
@@ -30,11 +30,14 @@ public class InstructionFetch extends FasePadrao {
 			return;
 		}
 		instrucaoAtual = new InstrucaoWrapper(dadosInstrucao);
-		instrucaoAtual.setInstrucaoReal(ConversorInstrucoes.converterInstrucao(instrucaoAtual.getDado()));
+		instrucaoAtual.setInstrucaoReal(ConversorInstrucoes
+				.converterInstrucao(instrucaoAtual.getDado()));
 	}
-	
-	public void executarPasso2(){
-		if(!processador.temDependencia(instrucaoAtual)){
+
+	public void executarPasso2() {
+		if (instrucaoAtual != null
+				&& !processador.temDependencia(instrucaoAtual)) {
+			processador.notificarEntrada(instrucaoAtual);
 			ifId.adicionarInstrucao(instrucaoAtual);
 			instrucaoAtual = null;
 		}

@@ -8,6 +8,10 @@ public abstract class FasePadrao implements Fase {
 	protected InstrucaoWrapper instrucaoAtual;
 	protected Processador processador;
 
+	public InstrucaoWrapper getInstrucaoAtual(){
+		return instrucaoAtual;
+	}
+	
 	public FasePadrao(Processador p) {
 		processador = p;
 	}

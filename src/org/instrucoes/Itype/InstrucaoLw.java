@@ -1,5 +1,8 @@
 package org.instrucoes.Itype;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.BancoDeRegistradores;
 import org.Processador;
 import org.instrucoes.CodigoInstrucao;
@@ -31,6 +34,20 @@ public class InstrucaoLw extends InstrucaoItype {
 	@Override
 	public int getResultadoULAEndereco(Processador proc) {
 		return 0;
+	}
+	
+	@Override
+	public List<Integer> getDependenciasWrite() {
+		List<Integer> lista = new ArrayList<>(3);
+		lista.add(Integer.parseInt(rtCode, 2));
+		return lista;
+	}
+
+	@Override
+	public List<Integer> getDependenciasRead() {
+		List<Integer> lista = new ArrayList<>(3);
+		lista.add(Integer.parseInt(rsCode, 2));
+		return lista;
 	}
 
 }

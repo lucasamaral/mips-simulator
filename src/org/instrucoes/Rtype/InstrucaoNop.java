@@ -1,5 +1,8 @@
 package org.instrucoes.Rtype;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.Processador;
 import org.instrucoes.CodigoInstrucao;
 
@@ -9,9 +12,9 @@ public class InstrucaoNop extends InstrucaoRtype {
 		super(entrada);
 		codigo = CodigoInstrucao.NOP;
 	}
-	
+
 	@Override
-	public void writeBack(Processador banco,int valorULA, int valorMEM) {
+	public void writeBack(Processador banco, int valorULA, int valorMEM) {
 
 	}
 
@@ -30,4 +33,15 @@ public class InstrucaoNop extends InstrucaoRtype {
 		return 0;
 	}
 
+	@Override
+	public List<Integer> getDependenciasWrite() {
+		List<Integer> lista = new ArrayList<>(3);
+		return lista;
+	}
+
+	@Override
+	public List<Integer> getDependenciasRead() {
+		List<Integer> lista = new ArrayList<>(3);
+		return lista;
+	}
 }

@@ -1,5 +1,8 @@
 package org.instrucoes.Itype;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.Processador;
 import org.instrucoes.CodigoInstrucao;
 import org.latches.LatchEXMEM;
@@ -29,6 +32,20 @@ public class InstrucaoSw extends InstrucaoItype {
 
 	public void memory(int valor, Processador proc, LatchEXMEM exMem) {
 		proc.carregarNaMemoria(valor, exMem.getValorEscreverNaMemoria());
+	}
+
+	@Override
+	public List<Integer> getDependenciasWrite() {
+		List<Integer> lista = new ArrayList<>(3);
+		return lista;
+	}
+
+	@Override
+	public List<Integer> getDependenciasRead() {
+		List<Integer> lista = new ArrayList<>(3);
+		lista.add(Integer.parseInt(rtCode, 2));
+		lista.add(Integer.parseInt(rsCode, 2));
+		return lista;
 	}
 
 }
