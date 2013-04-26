@@ -1,7 +1,6 @@
 package org.instrucoes;
 
 import org.BancoDeRegistradores;
-import org.MemoriaDados;
 import org.Processador;
 
 public abstract class Instrucao {

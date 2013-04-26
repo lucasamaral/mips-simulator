@@ -12,22 +12,5 @@ public class InstrucaoSw extends InstrucaoItype {
 		codigo = CodigoInstrucao.SW;
 	}
 
-	@Override
-	public void execute(Processador proc) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void decode(Processador proc) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void memory(MemoriaDados memoria) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

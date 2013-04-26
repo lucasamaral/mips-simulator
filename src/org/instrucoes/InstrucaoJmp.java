@@ -1,38 +1,35 @@
 package org.instrucoes;
 
 import org.BancoDeRegistradores;
-import org.MemoriaDados;
 import org.Processador;
 
 
 public class InstrucaoJmp extends Instrucao {
 
+	protected String immCode;
+	
 	public InstrucaoJmp(String entrada) {
 		super(entrada);
 		codigo = CodigoInstrucao.JMP;
+		immCode = dados.substring(16, 32);
 	}
 
 	@Override
-	public void execute(Processador proc) {
-		// TODO Auto-generated method stub
+	public void writeBack(BancoDeRegistradores banco, int valorULA, int valorMem) { }
 
+	@Override
+	public int getResultadoULA(Processador proc) {
+		return 0;
 	}
 
 	@Override
-	public void decode(Processador proc) {
-		// TODO Auto-generated method stub
-		
+	public boolean getCondicaoULA(Processador proc) {
+		return false;
 	}
 
 	@Override
-	public void memory(MemoriaDados memoria) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void writeBack(BancoDeRegistradores banco, int valorULA, int valorMem) {
-		// TODO Auto-generated method stub
+	public int getResultadoULAEndereco(Processador proc) {
+		return Integer.parseInt(immCode, 2);
 	}
 
 }

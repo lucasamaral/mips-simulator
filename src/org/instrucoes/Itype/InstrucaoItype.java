@@ -25,8 +25,5 @@ public abstract class InstrucaoItype extends Instrucao {
 	}
 	
 	@Override
-	public void writeBack(BancoDeRegistradores banco,int valorUla, int valorMem){
-	}
-	
-
+	public void writeBack(BancoDeRegistradores banco,int valorULA, int valorMem) {}
 }

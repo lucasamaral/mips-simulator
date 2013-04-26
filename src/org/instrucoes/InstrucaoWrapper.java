@@ -1,6 +1,7 @@
 package org.instrucoes;
 
 import org.BancoDeRegistradores;
+import org.Processador;
 
 public class InstrucaoWrapper {
 
@@ -45,16 +46,16 @@ public class InstrucaoWrapper {
 		return instrucao.isBranch();
 	}
 
-	public int getResultadoULA() {
-		return instrucao.getResultadoULA();
+	public int getResultadoULA(Processador proc) {
+		return instrucao.getResultadoULA(proc);
 	}
 
-	public boolean getCondicaoULA() {
-		return instrucao.getCondicaoULA();
+	public boolean getCondicaoULA(Processador proc) {
+		return instrucao.getCondicaoULA(proc);
 	}
 
-	public int getResultadoULAEndereco() {
-		return instrucao.getResultadoULAEndereco();
+	public int getResultadoULAEndereco(Processador proc) {
+		return instrucao.getResultadoULAEndereco(proc);
 	}
 	
 }

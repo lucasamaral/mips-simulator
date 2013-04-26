@@ -1,6 +1,5 @@
 package org.instrucoes.Rtype;
 
-import org.MemoriaDados;
 import org.Processador;
 import org.instrucoes.CodigoInstrucao;
 
@@ -12,21 +11,20 @@ public class InstrucaoSub extends InstrucaoRtype {
 	}
 
 	@Override
-	public void execute(Processador proc) {
-		// TODO Auto-generated method stub
-
+	public int getResultadoULA(Processador proc) {
+		int sub;
+		sub = proc.pegardosRegistradores(rsCode) - proc.pegardosRegistradores(rtCode);
+		return sub;
 	}
 
 	@Override
-	public void decode(Processador proc) {
-		// TODO Auto-generated method stub
-		
+	public boolean getCondicaoULA(Processador proc) {
+		return false;
 	}
 
 	@Override
-	public void memory(MemoriaDados memoria) {
-		// TODO Auto-generated method stub
-		
+	public int getResultadoULAEndereco(Processador proc) {
+		return 0;
 	}
 
 }

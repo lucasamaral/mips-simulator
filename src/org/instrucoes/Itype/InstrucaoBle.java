@@ -1,7 +1,5 @@
 package org.instrucoes.Itype;
 
-import org.BancoDeRegistradores;
-import org.MemoriaDados;
 import org.Processador;
 import org.instrucoes.CodigoInstrucao;
 
@@ -12,30 +10,25 @@ public class InstrucaoBle extends InstrucaoItype {
 		codigo = CodigoInstrucao.BLE;
 	}
 
-	@Override
-	public void execute(Processador proc) {
-		// if(rs<=rt) { PC = int(imm) }
-		BancoDeRegistradores banco = proc.getRegistradores();
-		int rsValue = banco.readRegister(rsCode);
-		int rtValue = banco.readRegister(rtCode);
-		if(rsValue <= rtValue){
-			proc.setPc(Integer.parseInt(immCode, 2));
-		}
-	}
-
-	@Override
-	public void decode(Processador proc) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void memory(MemoriaDados memoria) {
-		// TODO Auto-generated method stub	
-	}
-	
 	public boolean isBranch() {
 		return true;
+	}
+
+	@Override
+	public int getResultadoULA(Processador proc) {
+		return 0;
+	}
+
+	@Override
+	public boolean getCondicaoULA(Processador proc) {
+		int rsValue = proc.pegardosRegistradores(rsCode);
+		int rtValue = proc.pegardosRegistradores(rtCode);
+		return rsValue<=rtValue;
+	}
+
+	@Override
+	public int getResultadoULAEndereco(Processador proc) {
+		return proc.getPc() + Integer.parseInt(immCode, 2);
 	}
 
 }
