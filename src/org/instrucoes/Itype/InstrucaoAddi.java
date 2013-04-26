@@ -1,25 +1,27 @@
-package org.instrucoes.Rtype;
+package org.instrucoes.Itype;
 
 import org.BancoDeRegistradores;
 import org.Processador;
 
-public class InstrucaoAdd extends InstrucaoRtype {
-	
-	public InstrucaoAdd(String entrada) {
+public class InstrucaoAddi extends InstrucaoItype {
+
+	public InstrucaoAddi(String entrada) {
 		super(entrada);
 	}
-	
+
 	@Override
 	public void executar(Processador proc) {
-		// Soma: rd = rs+rt
+		// Calcular rt = rs + int(imm)
 		BancoDeRegistradores banco = proc.getRegistradores();
 		int soma;
 		try {
-			soma = banco.readRegister(rsCode) + banco.readRegister(rtCode);
+			soma  = banco.readRegister(rsCode)+Integer.parseInt(immCode, 2);
 			resultado = soma;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+
 	}
 
 }

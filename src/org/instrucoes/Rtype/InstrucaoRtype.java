@@ -5,6 +5,11 @@ import org.instrucoes.TipoInstrucao;
 
 public abstract class InstrucaoRtype extends Instrucao {
 	
+	protected int resultado;
+	protected String rsCode;
+	protected String rtCode;
+	protected String rdCode;
+	
 	public InstrucaoRtype(String entrada) {
 		super(entrada);
 		tipo = TipoInstrucao.ADD;
@@ -12,9 +17,5 @@ public abstract class InstrucaoRtype extends Instrucao {
 		rtCode = dados.substring(11, 16);
 		rdCode = dados.substring(16, 21);
 	}
-	
-	String rsCode;
-	String rtCode;
-	String rdCode;
 
 }

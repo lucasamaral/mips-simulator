@@ -18,7 +18,7 @@ public class InstrucaoMul extends InstrucaoRtype {
 			multiplicacao = banco.readRegister(rsCode)*banco.readRegister(rtCode);
 			String mult = Integer.toBinaryString(multiplicacao);
 			mult = mult.substring(mult.length()-32);
-			banco.writeRegister(rdCode, Integer.parseInt(mult, 2));
+			resultado = Integer.parseInt(mult, 2);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
