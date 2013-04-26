@@ -18,21 +18,18 @@ public class RegisterDecoder extends FasePadrao {
 	@Override
 	public void executarPasso1() {
 		instrucaoAtual = ifId.pegarInstrucao();
-		super.executarPasso1();
-		processar();
 	}
 	
 	@Override
 	public void executarPasso2() {
-		super.executarPasso2();
 		idEx.adicionarInstrucao(instrucaoAtual);
 		instrucaoAtual = null;
 	}
 
-
-	private void processar() {
+	@Override
+	public void carregarSinais() {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 }

@@ -44,5 +44,17 @@ public class InstrucaoWrapper {
 	public boolean isBranch() {
 		return instrucao.isBranch();
 	}
+
+	public int getResultadoULA() {
+		return instrucao.getResultadoULA();
+	}
+
+	public boolean getCondicaoULA() {
+		return instrucao.getCondicaoULA();
+	}
+
+	public int getResultadoULAEndereco() {
+		return instrucao.getResultadoULAEndereco();
+	}
 	
 }

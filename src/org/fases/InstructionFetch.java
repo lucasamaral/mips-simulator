@@ -35,7 +35,6 @@ public class InstructionFetch extends FasePadrao {
 	}
 	
 	public void executarPasso2(){
-		super.executarPasso2();
 		if(!processador.temDependencia(instrucaoAtual)){
 			ifId.adicionarInstrucao(instrucaoAtual);
 			instrucaoAtual = null;

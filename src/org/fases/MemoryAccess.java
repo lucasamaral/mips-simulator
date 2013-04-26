@@ -19,33 +19,42 @@ public class MemoryAccess extends FasePadrao {
 	@Override
 	public void executarPasso1() {
 		instrucaoAtual = exMem.pegarInstrucao();
-		super.executarPasso1();
 	}
 
 	@Override
 	public void executarPasso2() {
-		super.executarPasso2();
-		memWb.adicionarInstrucao(instrucaoAtual);
-		switch (instrucaoAtual.getCodigo()) {
-		case SW:
-			InstrucaoSw inss = (InstrucaoSw) instrucaoAtual.getInstrucao();
-			processador.carregarNaMemoria(exMem.getResultadoULA(),
-					inss.getValorRtCode());
-		case LW:
-			memWb.setResultadoMem(processador.pegarDaMemoria(exMem
-					.getResultadoULA()));
-		default:
-			break;
+		if (instrucaoAtual != null) {
+			memWb.adicionarInstrucao(instrucaoAtual);
+			switch (instrucaoAtual.getCodigo()) {
+			case SW:
+				InstrucaoSw inss = (InstrucaoSw) instrucaoAtual.getInstrucao();
+				processador.carregarNaMemoria(exMem.getResultadoULA(),
+						inss.getValorRtCode());
+			case LW:
+				memWb.setResultadoMem(processador.pegarDaMemoria(exMem
+						.getResultadoULA()));
+			default:
+				break;
 
-		}
-		if(instrucaoAtual.isBranch()){
-			if(exMem.getZero()){
-				processador.setPc(exMem.getProximoEndereco());
-			}else{
-				processador.incrementarPC();
 			}
+			if (instrucaoAtual.isBranch()) {
+				if (exMem.getZero()) {
+					processador.setPc(exMem.getProximoEndereco());
+				} else {
+					processador.incrementarPC();
+				}
+			}
+			instrucaoAtual = null;
+		}else{
+			processador.incrementarPC();
 		}
-		instrucaoAtual = null;
+
+	}
+
+	@Override
+	public void carregarSinais() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

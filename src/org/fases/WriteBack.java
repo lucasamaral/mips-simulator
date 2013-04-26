@@ -21,8 +21,16 @@ public class WriteBack extends FasePadrao {
 	@Override
 	public void executarPasso2() {
 		BancoDeRegistradores banco = processador.getRegistradores();
-		instrucaoAtual.writeBack(banco,memWb.getResultadoULA(),memWb.getResultadoMem());
+		if(instrucaoAtual!=null){
+			instrucaoAtual.writeBack(banco,memWb.getResultadoULA(),memWb.getResultadoMem());
+		}
 		instrucaoAtual = null;
+	}
+
+	@Override
+	public void carregarSinais() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

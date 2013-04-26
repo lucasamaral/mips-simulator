@@ -15,19 +15,6 @@ public abstract class FasePadrao implements Fase {
 	public String getNomeFase() {
 		return this.getClass().getName();
 	}
-	
-	public void carregarSinais(){
-		
-	}
-
-	@Override
-	public void executarPasso1() {
-	}
-
-	@Override
-	public void executarPasso2() {
-		System.out.println(this + " executando instrucao " + instrucaoAtual);
-	}
 
 	public Processador getProcessador() {
 		return this.processador;

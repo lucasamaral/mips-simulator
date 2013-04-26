@@ -1,5 +1,7 @@
 package org.instrucoes;
 
+import org.BancoDeRegistradores;
+import org.MemoriaDados;
 import org.Processador;
 
 
@@ -11,9 +13,26 @@ public class InstrucaoJmp extends Instrucao {
 	}
 
 	@Override
-	public void executar(Processador proc) {
+	public void execute(Processador proc) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void decode(Processador proc) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void memory(MemoriaDados memoria) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void writeBack(BancoDeRegistradores banco, int valorULA, int valorMem) {
+		// TODO Auto-generated method stub
 	}
 
 }

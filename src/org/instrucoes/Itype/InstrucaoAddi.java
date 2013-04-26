@@ -1,6 +1,7 @@
 package org.instrucoes.Itype;
 
 import org.BancoDeRegistradores;
+import org.MemoriaDados;
 import org.Processador;
 import org.instrucoes.CodigoInstrucao;
 
@@ -12,7 +13,7 @@ public class InstrucaoAddi extends InstrucaoItype {
 	}
 
 	@Override
-	public void executar(Processador proc) {
+	public void execute(Processador proc) {
 		// Calcular rt = rs + int(imm)
 		BancoDeRegistradores banco = proc.getRegistradores();
 		int soma;
@@ -24,6 +25,18 @@ public class InstrucaoAddi extends InstrucaoItype {
 	@Override
 	public void writeBack(BancoDeRegistradores banco,int valorULA, int valorMem) {
 		banco.writeRegister(rtCode, valorULA);
+	}
+
+	@Override
+	public void decode(Processador proc) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void memory(MemoriaDados memoria) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

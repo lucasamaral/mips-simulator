@@ -16,4 +16,19 @@ public class LatchEXMEM extends Latch{
 		return false;
 	}
 
+	public void setResultadoULA(int resultadoULA) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setZeroULA(boolean condicaoULA) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setEnderecoSomado(int resultadoULAEndereco) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
