@@ -38,7 +38,7 @@ public class MemoryAccess extends FasePadrao {
 
 			}
 			if (instrucaoAtual.isBranch()) {
-				if (exMem.getZero()) {
+				if (exMem.getZeroULA()) {
 					processador.setPc(exMem.getProximoEndereco());
 				} else {
 					processador.incrementarPC();

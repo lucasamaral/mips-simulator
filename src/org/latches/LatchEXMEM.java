@@ -2,33 +2,33 @@ package org.latches;
 
 public class LatchEXMEM extends Latch{
 
+	private boolean zeroULA;
+	private int possivelProximoEndereco;
+	private int resultadoULA;
+
 	public int getResultadoULA() {
-		return 0;
+		return resultadoULA;
 	}
 
 	public int getProximoEndereco() {
-		// TODO Auto-generated method stub
-		return 0;
+		return possivelProximoEndereco;
 	}
 
-	public boolean getZero() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean getZeroULA() {
+		return zeroULA;
 	}
 
 	public void setResultadoULA(int resultadoULA) {
-		// TODO Auto-generated method stub
+		this.resultadoULA = resultadoULA;
 		
 	}
 
 	public void setZeroULA(boolean condicaoULA) {
-		// TODO Auto-generated method stub
-		
+		zeroULA = condicaoULA;
 	}
 
 	public void setEnderecoSomado(int resultadoULAEndereco) {
-		// TODO Auto-generated method stub
-		
+		possivelProximoEndereco = resultadoULAEndereco;
 	}
 
 }
