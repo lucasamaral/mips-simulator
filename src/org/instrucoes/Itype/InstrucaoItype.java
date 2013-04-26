@@ -20,9 +20,13 @@ public abstract class InstrucaoItype extends Instrucao {
 		immCode = dados.substring(16, 32);
 	}
 	
+	public int getValorRtCode(){
+		return Integer.parseInt(rtCode, 2);
+	}
+	
 	@Override
-	public void writeBack(BancoDeRegistradores banco,int valor){
-		
+	public void writeBack(BancoDeRegistradores banco,int valorUla, int valorMem){
+		throw new RuntimeException();
 	}
 	
 

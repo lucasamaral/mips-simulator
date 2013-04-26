@@ -118,4 +118,24 @@ public class Processador {
 		return false;
 	}
 
+	public void carregarNaMemoria(int endereco, int valor) {
+		// TODO Auto-generated method stub
+	}
+	
+	public void carregarNosRegistradores(String cod,int valor){
+		
+	}
+
+	public int pegarDaMemoria(int endereco) {
+		return 0;
+	}
+	
+	public int pegardosRegistradores(String endereco){
+		return 0;
+	}
+
+	public void incrementarPC() {
+		pc = pc+4;
+	}
+
 }

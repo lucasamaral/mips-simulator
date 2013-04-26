@@ -26,13 +26,8 @@ public abstract class InstrucaoRtype extends Instrucao {
 	}
 	
 	@Override
-	public void writeBack(BancoDeRegistradores banco,int valor) {
-		try {
-			banco.writeRegister(rdCode, valor);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void writeBack(BancoDeRegistradores banco,int valorULA,int valorMem) {
+		banco.writeRegister(rdCode, valorULA);
 	}
 
 	public String getRtCode() {

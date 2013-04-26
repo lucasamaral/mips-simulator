@@ -28,7 +28,11 @@ public abstract class Instrucao {
 		return null;
 	}
 
-	public void writeBack(BancoDeRegistradores banco, int valor) {
+	public void writeBack(BancoDeRegistradores banco, int valorULA, int valorMem) {
 		throw new RuntimeException();
+	}
+
+	public boolean isBranch() {
+		return false;
 	}
 }

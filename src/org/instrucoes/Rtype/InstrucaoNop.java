@@ -1,8 +1,8 @@
 package org.instrucoes.Rtype;
 
+import org.BancoDeRegistradores;
 import org.Processador;
 import org.instrucoes.CodigoInstrucao;
-import org.instrucoes.TipoInstrucao;
 
 public class InstrucaoNop extends InstrucaoRtype {
 
@@ -13,7 +13,11 @@ public class InstrucaoNop extends InstrucaoRtype {
 
 	@Override
 	public void executar(Processador proc) {
-		// TODO Implementar a soma: rs = rd+rt
+
+	}
+	
+	@Override
+	public void writeBack(BancoDeRegistradores banco,int valorULA, int valorMEM) {
 
 	}
 

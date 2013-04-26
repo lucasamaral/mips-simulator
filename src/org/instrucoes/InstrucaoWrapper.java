@@ -15,14 +15,14 @@ public class InstrucaoWrapper {
 		return dado;
 	}
 
-	public CodigoInstrucao getTipo() {
+	public CodigoInstrucao getCodigo() {
 		if(instrucao!=null)
 			return instrucao.codigo;
 		return CodigoInstrucao.NOP;
 	}
 	
 	public String toString(){
-		return getTipo().name();
+		return getCodigo().name();
 	}
 
 	public Instrucao getInstrucao() {
@@ -37,9 +37,12 @@ public class InstrucaoWrapper {
 		return instrucao.getType();
 	}
 
-	public void writeBack(BancoDeRegistradores banco, int valor) {
-		instrucao.writeBack(banco, valor);
-		
+	public void writeBack(BancoDeRegistradores banco, int valorULA, int valorMEM) {
+		instrucao.writeBack(banco, valorULA,valorMEM);
+	}
+
+	public boolean isBranch() {
+		return instrucao.isBranch();
 	}
 	
 }

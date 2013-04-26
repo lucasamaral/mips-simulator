@@ -20,5 +20,10 @@ public class InstrucaoAddi extends InstrucaoItype {
 		resultado = soma;
 
 	}
+	
+	@Override
+	public void writeBack(BancoDeRegistradores banco,int valorULA, int valorMem) {
+		banco.writeRegister(rtCode, valorULA);
+	}
 
 }
