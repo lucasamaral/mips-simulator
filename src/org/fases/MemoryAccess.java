@@ -18,7 +18,6 @@ public class MemoryAccess extends FasePadrao {
 
 	@Override
 	public void executarPasso1() {
-		instrucaoAtual = exMem.pegarInstrucao();
 	}
 
 	@Override
@@ -53,8 +52,7 @@ public class MemoryAccess extends FasePadrao {
 
 	@Override
 	public void carregarSinais() {
-		// TODO Auto-generated method stub
-		
+		instrucaoAtual = exMem.pegarInstrucao();
 	}
 
 }

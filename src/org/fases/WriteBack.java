@@ -15,7 +15,6 @@ public class WriteBack extends FasePadrao {
 
 	@Override
 	public void executarPasso1(){
-		instrucaoAtual = memWb.pegarInstrucao();
 	}
 	
 	@Override
@@ -29,8 +28,7 @@ public class WriteBack extends FasePadrao {
 
 	@Override
 	public void carregarSinais() {
-		// TODO Auto-generated method stub
-		
+		instrucaoAtual = memWb.pegarInstrucao();
 	}
 
 }

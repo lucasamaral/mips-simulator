@@ -18,21 +18,20 @@ public class Executer extends FasePadrao {
 	
 	@Override
 	public void executarPasso1(){
-		instrucaoAtual = idEx.pegarInstrucao();
 	}
 	
 	@Override
 	public void executarPasso2() {
 		exMem.adicionarInstrucao(instrucaoAtual);
+		exMem.setResultadoULA(instrucaoAtual.getResultadoULA(processador));
+		exMem.setZeroULA(instrucaoAtual.getCondicaoULA(processador));
+		exMem.setEnderecoSomado(instrucaoAtual.getResultadoULAEndereco(processador));
 		instrucaoAtual = null;
-		exMem.setResultadoULA(instrucaoAtual.getResultadoULA());
-		exMem.setZeroULA(instrucaoAtual.getCondicaoULA());
-		exMem.setEnderecoSomado(instrucaoAtual.getResultadoULAEndereco());
 	}
 
 	@Override
 	public void carregarSinais() {
-		// TODO Auto-generated method stub
+		instrucaoAtual = idEx.pegarInstrucao();
 	}
 
 
