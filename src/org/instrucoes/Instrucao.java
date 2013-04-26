@@ -1,11 +1,8 @@
 package org.instrucoes;
 
 import org.BancoDeRegistradores;
+import org.MemoriaDados;
 import org.Processador;
-
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
-import com.sun.org.apache.xml.internal.utils.UnImplNode;
 
 
 
@@ -21,11 +18,13 @@ public abstract class Instrucao {
 		dados = entrada;
 	}
 	
-	public abstract void executar(Processador proc);
+	public abstract void decode(Processador proc);
+	public abstract void execute(Processador proc);
+	public abstract void memory(MemoriaDados memoria);
+	
 
 	public TipoInstrucao getType() {
-		// TODO Auto-generated method stub
-		return null;
+		return tipo;
 	}
 
 	public void writeBack(BancoDeRegistradores banco, int valor) {

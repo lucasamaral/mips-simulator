@@ -1,5 +1,6 @@
 package org.instrucoes.Rtype;
 
+import org.MemoriaDados;
 import org.Processador;
 import org.instrucoes.CodigoInstrucao;
 import org.instrucoes.TipoInstrucao;
@@ -12,9 +13,21 @@ public class InstrucaoNop extends InstrucaoRtype {
 	}
 
 	@Override
-	public void executar(Processador proc) {
+	public void execute(Processador proc) {
 		// TODO Implementar a soma: rs = rd+rt
 
+	}
+
+	@Override
+	public void decode(Processador proc) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void memory(MemoriaDados memoria) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

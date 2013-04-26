@@ -6,12 +6,14 @@ import org.instrucoes.CodigoInstrucao;
 import org.instrucoes.TipoInstrucao;
 
 public abstract class InstrucaoRtype extends Instrucao {
-	
+
 	protected int resultado;
 	protected String rsCode;
+	protected int rsValue;
 	protected String rtCode;
+	protected int rtValue;
 	protected String rdCode;
-	
+
 	public InstrucaoRtype(String entrada) {
 		super(entrada);
 		tipo = TipoInstrucao.RTYPE;
@@ -20,19 +22,14 @@ public abstract class InstrucaoRtype extends Instrucao {
 		rtCode = dados.substring(11, 16);
 		rdCode = dados.substring(16, 21);
 	}
-	
+
 	public String getRsCode() {
 		return rsCode;
 	}
-	
+
 	@Override
-	public void writeBack(BancoDeRegistradores banco,int valor) {
-		try {
-			banco.writeRegister(rdCode, valor);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void writeBack(BancoDeRegistradores banco, int valor) {
+		banco.writeRegister(rdCode, valor);
 	}
 
 	public String getRtCode() {
