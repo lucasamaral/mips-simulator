@@ -1,6 +1,5 @@
 package org.instrucoes;
 
-import org.BancoDeRegistradores;
 import org.Processador;
 
 public abstract class Instrucao {
@@ -14,7 +13,7 @@ public abstract class Instrucao {
 		dados = entrada;
 	}
 
-	public abstract void writeBack(BancoDeRegistradores banco, int valorULA,
+	public abstract void writeBack(Processador banco, int valorULA,
 			int valorMem);
 
 	public TipoInstrucao getType() {

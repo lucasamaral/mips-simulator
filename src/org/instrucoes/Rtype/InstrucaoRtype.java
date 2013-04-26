@@ -1,8 +1,8 @@
 package org.instrucoes.Rtype;
 
-import org.BancoDeRegistradores;
-import org.instrucoes.Instrucao;
+import org.Processador;
 import org.instrucoes.CodigoInstrucao;
+import org.instrucoes.Instrucao;
 import org.instrucoes.TipoInstrucao;
 
 public abstract class InstrucaoRtype extends Instrucao {
@@ -25,8 +25,9 @@ public abstract class InstrucaoRtype extends Instrucao {
 	}
 
 	@Override
-	public void writeBack(BancoDeRegistradores banco,int valorULA,int valorMem) {
-		banco.writeRegister(rdCode, valorULA);
+	public void writeBack(Processador banco, int valorULA, int valorMem) {
+		System.out.println("Carregando " + valorULA + " em " + rdCode);
+		banco.carregarNosRegistradores(rdCode, valorULA);
 	}
 
 	public String getRtCode() {

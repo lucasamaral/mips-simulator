@@ -9,6 +9,9 @@ public class MemoryAccess extends FasePadrao {
 
 	private LatchEXMEM exMem;
 	private LatchMEMWB memWb;
+	private boolean zeroULA;
+	private int possivelProximoEndereco;
+	private int resultadoULA;
 
 	public MemoryAccess(Processador p, LatchEXMEM exMem, LatchMEMWB memWb) {
 		super(p);
@@ -27,32 +30,30 @@ public class MemoryAccess extends FasePadrao {
 			switch (instrucaoAtual.getCodigo()) {
 			case SW:
 				InstrucaoSw inss = (InstrucaoSw) instrucaoAtual.getInstrucao();
-				processador.carregarNaMemoria(exMem.getResultadoULA(),
-						inss.getValorRtCode());
+				inss.memory(resultadoULA, processador);
 			case LW:
-				memWb.setResultadoMem(processador.pegarDaMemoria(exMem
-						.getResultadoULA()));
+				memWb.setResultadoMem(processador.pegarDaMemoria(resultadoULA));
 			default:
 				break;
 
 			}
-			if (instrucaoAtual.isBranch()) {
-				if (exMem.getZeroULA()) {
-					processador.setPc(exMem.getProximoEndereco());
-				} else {
-					processador.incrementarPC();
-				}
-			}
-			instrucaoAtual = null;
-		}else{
+		}
+		memWb.setResultadoULA(resultadoULA);
+		if (instrucaoAtual != null && instrucaoAtual.isBranch()
+				&& exMem.getZeroULA()) {
+			processador.setPc(possivelProximoEndereco);
+		} else {
 			processador.incrementarPC();
 		}
-
+		instrucaoAtual = null;
 	}
 
 	@Override
 	public void carregarSinais() {
 		instrucaoAtual = exMem.pegarInstrucao();
+		zeroULA = exMem.getZeroULA();
+		possivelProximoEndereco = exMem.getProximoEndereco();
+		resultadoULA = exMem.getResultadoULA();
 	}
 
 }

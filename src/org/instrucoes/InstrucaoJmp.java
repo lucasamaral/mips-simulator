@@ -1,6 +1,5 @@
 package org.instrucoes;
 
-import org.BancoDeRegistradores;
 import org.Processador;
 
 
@@ -15,7 +14,7 @@ public class InstrucaoJmp extends Instrucao {
 	}
 
 	@Override
-	public void writeBack(BancoDeRegistradores banco, int valorULA, int valorMem) { }
+	public void writeBack(Processador banco, int valorULA, int valorMem) { }
 
 	@Override
 	public int getResultadoULA(Processador proc) {
@@ -24,7 +23,7 @@ public class InstrucaoJmp extends Instrucao {
 
 	@Override
 	public boolean getCondicaoULA(Processador proc) {
-		return false;
+		return true;
 	}
 
 	@Override

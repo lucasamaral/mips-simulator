@@ -1,5 +1,12 @@
 package org;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -10,19 +17,19 @@ import org.fases.MemoryAccess;
 import org.fases.RegisterDecoder;
 import org.fases.WriteBack;
 import org.instrucoes.InstrucaoWrapper;
-import org.latches.Latch;
 import org.latches.LatchEXMEM;
 import org.latches.LatchIDEX;
 import org.latches.LatchIFID;
 import org.latches.LatchMEMWB;
 
 public class Processador {
-	
+
 	private CentralSinais centralSinais;
 	private int pc;
 	private MemoriaDados memoria;
 	private BancoDeRegistradores registradores;
 	private MemoriaInstrucoes instrucoes;
+	private int clockCount = 0;
 	private List<InstrucaoWrapper> instrucoesCompletadas = new LinkedList<>();
 	private LatchIFID ifId;
 	private LatchIDEX idEx;
@@ -38,6 +45,11 @@ public class Processador {
 		setPc(0);
 		construirLatches();
 		fases = construirFases();
+	}
+
+	public void adicionarInstrucaoCompletada(InstrucaoWrapper inst) {
+		if (inst != null)
+			instrucoesCompletadas.add(inst);
 	}
 
 	private void construirLatches() {
@@ -67,6 +79,8 @@ public class Processador {
 		for (Fase f : fases) {
 			f.executarPasso2();
 		}
+		System.out.println(clockCount++);
+		System.out.println(pc);
 	}
 
 	public boolean isFinished() {
@@ -84,14 +98,6 @@ public class Processador {
 			step();
 			System.out.println("");
 		} while (!isFinished());
-	}
-
-	public MemoriaDados getMemoria() {
-		return memoria;
-	}
-
-	public BancoDeRegistradores getRegistradores() {
-		return registradores;
 	}
 
 	public MemoriaInstrucoes getInstrucoes() {
@@ -119,23 +125,53 @@ public class Processador {
 	}
 
 	public void carregarNaMemoria(int endereco, int valor) {
-		// TODO Auto-generated method stub
+		memoria.setValue(endereco, valor);
 	}
-	
-	public void carregarNosRegistradores(String cod,int valor){
-		
+
+	public void carregarNosRegistradores(String cod, int valor) {
+		registradores.writeRegister(cod, valor);
 	}
 
 	public int pegarDaMemoria(int endereco) {
-		return 0;
+		return memoria.getValue(endereco);
 	}
-	
-	public int pegardosRegistradores(String endereco){
-		return 0;
+
+	public int pegardosRegistradores(String endereco) {
+		return registradores.readRegister(endereco);
 	}
 
 	public void incrementarPC() {
-		pc = pc+4;
+		pc = pc + 4;
+	}
+
+	public void gerarLog() {
+		Charset encoding = StandardCharsets.UTF_8;
+		Path path = Paths.get("Saida-programa.txt");
+		try (BufferedWriter writer = Files.newBufferedWriter(path, encoding)) {
+			writer.write("Instrucoes executadas:");
+			writer.newLine();
+			for (InstrucaoWrapper line : instrucoesCompletadas) {
+				System.out.println(line);
+				writer.write(line.toString());
+				writer.newLine();
+			}
+			writer.newLine();
+			writer.write("Estado final da memoria:");
+			writer.newLine();
+			for (int end : memoria.getEnderecosUtilizados()) {
+				writer.write("" + end + " - " + memoria.getValue(end));
+				writer.newLine();
+			}
+			writer.newLine();
+			writer.write("Estado final dos registradores:");
+			writer.newLine();
+			for (int end = 0; end < 32; end++) {
+				writer.write("" + end + " - " + registradores.readRegister(Integer.toBinaryString(end)));
+				writer.newLine();
+			}
+		} catch (IOException e) {
+			// TODO: handle exception
+		}
 	}
 
 }

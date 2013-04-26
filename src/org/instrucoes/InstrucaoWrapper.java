@@ -1,6 +1,5 @@
 package org.instrucoes;
 
-import org.BancoDeRegistradores;
 import org.Processador;
 
 public class InstrucaoWrapper {
@@ -38,8 +37,8 @@ public class InstrucaoWrapper {
 		return instrucao.getType();
 	}
 
-	public void writeBack(BancoDeRegistradores banco, int valorULA, int valorMEM) {
-		instrucao.writeBack(banco, valorULA,valorMEM);
+	public void writeBack(Processador proc, int valorULA, int valorMEM) {
+		instrucao.writeBack(proc, valorULA,valorMEM);
 	}
 
 	public boolean isBranch() {

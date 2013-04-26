@@ -1,6 +1,5 @@
 package org.instrucoes.Itype;
 
-import org.BancoDeRegistradores;
 import org.Processador;
 import org.instrucoes.CodigoInstrucao;
 
@@ -12,14 +11,13 @@ public class InstrucaoAddi extends InstrucaoItype {
 	}
 
 	@Override
-	public void writeBack(BancoDeRegistradores banco,int valorULA, int valorMem) {
-		banco.writeRegister(rtCode, valorULA);
+	public void writeBack(Processador banco,int valorULA, int valorMem) {
+		banco.carregarNosRegistradores(rtCode, valorULA);
 	}
 
 	@Override
 	public int getResultadoULA(Processador proc) {
-		int soma;
-		soma = proc.pegardosRegistradores(rsCode) + Integer.parseInt(immCode, 2);
+		int soma = proc.pegardosRegistradores(rsCode) + Integer.parseInt(immCode, 2);
 		return soma;
 	}
 

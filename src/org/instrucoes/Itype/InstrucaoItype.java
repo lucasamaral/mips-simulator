@@ -1,6 +1,6 @@
 package org.instrucoes.Itype;
 
-import org.BancoDeRegistradores;
+import org.Processador;
 import org.instrucoes.Instrucao;
 import org.instrucoes.TipoInstrucao;
 
@@ -25,5 +25,5 @@ public abstract class InstrucaoItype extends Instrucao {
 	}
 	
 	@Override
-	public void writeBack(BancoDeRegistradores banco,int valorULA, int valorMem) {}
+	public void writeBack(Processador banco,int valorULA, int valorMem) {}
 }

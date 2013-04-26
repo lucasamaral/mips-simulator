@@ -12,8 +12,7 @@ public class InstrucaoAdd extends InstrucaoRtype {
 
 	@Override
 	public int getResultadoULA(Processador proc) {
-		int soma;
-		soma = proc.pegardosRegistradores(rsCode) + proc.pegardosRegistradores(rtCode);
+		int soma = proc.pegardosRegistradores(rsCode) + proc.pegardosRegistradores(rtCode);
 		return soma;
 	}
 

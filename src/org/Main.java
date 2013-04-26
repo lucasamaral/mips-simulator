@@ -16,6 +16,15 @@ public class Main {
 		MemoriaInstrucoes memIns = new MemoriaInstrucoes(instrucoes);
 		Processador p = new Processador(new MemoriaDados(), memIns);
 		inicializarInterface(p);
+		while(!p.isFinished()){
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		p.gerarLog();
 		System.out.println("Projeto Paulo André");
 	}
 

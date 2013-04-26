@@ -11,6 +11,8 @@ import java.util.Scanner;
 
 public class GeradorInstrucoesPrograma {
 
+	final static Charset ENCODING = StandardCharsets.UTF_8;
+	
 	public static String[] gerarProgramaPadrao() {
 		return new String[] {
 				"00100000000010100000000001100100 ;I1: addi R10,R0,100",
@@ -25,8 +27,6 @@ public class GeradorInstrucoesPrograma {
 				"10101100000001100000000000011100			; I10: sw R6,28(R0)",
 				"00011100110010100000000000001100			; I11: ble R6,R10,12" };
 	}
-
-	final static Charset ENCODING = StandardCharsets.UTF_8;
 
 	public String[] gerarProgramadeArquivo(String endereco) {
 		List<String> linhas = new LinkedList<>();

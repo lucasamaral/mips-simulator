@@ -1,6 +1,5 @@
 package org.instrucoes.Rtype;
 
-import org.BancoDeRegistradores;
 import org.Processador;
 import org.instrucoes.CodigoInstrucao;
 
@@ -12,7 +11,7 @@ public class InstrucaoNop extends InstrucaoRtype {
 	}
 	
 	@Override
-	public void writeBack(BancoDeRegistradores banco,int valorULA, int valorMEM) {
+	public void writeBack(Processador banco,int valorULA, int valorMEM) {
 
 	}
 

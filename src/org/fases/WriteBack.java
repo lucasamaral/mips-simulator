@@ -1,6 +1,5 @@
 package org.fases;
 
-import org.BancoDeRegistradores;
 import org.Processador;
 import org.latches.LatchMEMWB;
 
@@ -19,10 +18,10 @@ public class WriteBack extends FasePadrao {
 	
 	@Override
 	public void executarPasso2() {
-		BancoDeRegistradores banco = processador.getRegistradores();
 		if(instrucaoAtual!=null){
-			instrucaoAtual.writeBack(banco,memWb.getResultadoULA(),memWb.getResultadoMem());
+			instrucaoAtual.writeBack(processador,memWb.getResultadoULA(),memWb.getResultadoMem());
 		}
+		processador.adicionarInstrucaoCompletada(instrucaoAtual);
 		instrucaoAtual = null;
 	}
 
