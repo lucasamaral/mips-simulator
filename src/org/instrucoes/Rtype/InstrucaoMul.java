@@ -1,10 +1,8 @@
 package org.instrucoes.Rtype;
 
 import org.BancoDeRegistradores;
-import org.MemoriaDados;
 import org.Processador;
 import org.instrucoes.CodigoInstrucao;
-import org.instrucoes.TipoInstrucao;
 
 //Multiplica: rd = rs*rt
 public class InstrucaoMul extends InstrucaoRtype {
@@ -15,29 +13,28 @@ public class InstrucaoMul extends InstrucaoRtype {
 	}
 
 	@Override
-	public void decode(Processador proc) {
-		BancoDeRegistradores banco = proc.getRegistradores();
-		rsValue = banco.readRegister(rsCode);
-		rtValue = banco.readRegister(rtCode);
-	}
-	
-	@Override
-	public void execute(Processador proc) {
-		int multiplicacao;
-		multiplicacao = rsValue * rtValue;
-		String mult = Integer.toBinaryString(multiplicacao);
-		mult = mult.substring(mult.length() - 32);
-		resultado = Integer.parseInt(mult, 2);
+	public void writeBack(BancoDeRegistradores banco, int valorULA, int valorMem) {
+		banco.writeRegister(rdCode, valorULA);
 	}
 
 	@Override
-	public void memory(MemoriaDados memoria) {
-		// Mul não faz nada com memory
+	public int getResultadoULA(Processador proc) {
+		int multiplicacao;
+		multiplicacao = proc.pegardosRegistradores(rsCode) * proc.pegardosRegistradores(rtCode);
+		String mult = Integer.toBinaryString(multiplicacao);
+		mult = mult.substring(mult.length() - 32);
+		multiplicacao = Integer.parseInt(mult, 2);
+		return multiplicacao;
 	}
-	
+
 	@Override
-	public void writeBack(BancoDeRegistradores banco, int valorULA, int valorMem) {
-		banco.writeRegister(rdCode, valorULA);
+	public boolean getCondicaoULA(Processador proc) {
+		return false;
+	}
+
+	@Override
+	public int getResultadoULAEndereco(Processador proc) {
+		return 0;
 	}
 
 }

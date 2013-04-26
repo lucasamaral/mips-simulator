@@ -15,12 +15,6 @@ public abstract class Instrucao {
 		dados = entrada;
 	}
 
-	public abstract void decode(Processador proc);
-
-	public abstract void execute(Processador proc);
-
-	public abstract void memory(MemoriaDados memoria);
-
 	public abstract void writeBack(BancoDeRegistradores banco, int valorULA,
 			int valorMem);
 
@@ -31,10 +25,11 @@ public abstract class Instrucao {
 	public boolean isBranch() {
 		return false;
 	}
+	
+	
+	public abstract int getResultadoULA(Processador proc);
 
-	public abstract int getResultadoULA();
+	public abstract boolean getCondicaoULA(Processador proc);
 
-	public abstract boolean getCondicaoULA();
-
-	public abstract int getResultadoULAEndereco();
+	public abstract int getResultadoULAEndereco(Processador proc);
 }

@@ -1,7 +1,6 @@
 package org.instrucoes.Itype;
 
 import org.BancoDeRegistradores;
-import org.MemoriaDados;
 import org.Processador;
 import org.instrucoes.CodigoInstrucao;
 
@@ -13,30 +12,25 @@ public class InstrucaoAddi extends InstrucaoItype {
 	}
 
 	@Override
-	public void execute(Processador proc) {
-		// Calcular rt = rs + int(imm)
-		BancoDeRegistradores banco = proc.getRegistradores();
-		int soma;
-		soma = banco.readRegister(rsCode) + Integer.parseInt(immCode, 2);
-		resultado = soma;
-
-	}
-	
-	@Override
 	public void writeBack(BancoDeRegistradores banco,int valorULA, int valorMem) {
 		banco.writeRegister(rtCode, valorULA);
 	}
 
 	@Override
-	public void decode(Processador proc) {
-		// TODO Auto-generated method stub
-		
+	public int getResultadoULA(Processador proc) {
+		int soma;
+		soma = proc.pegardosRegistradores(rsCode) + Integer.parseInt(immCode, 2);
+		return soma;
 	}
 
 	@Override
-	public void memory(MemoriaDados memoria) {
-		// TODO Auto-generated method stub
-		
+	public boolean getCondicaoULA(Processador proc) {
+		return false;
+	}
+
+	@Override
+	public int getResultadoULAEndereco(Processador proc) {
+		return 0;
 	}
 
 }

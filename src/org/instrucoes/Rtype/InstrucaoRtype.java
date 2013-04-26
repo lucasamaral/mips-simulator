@@ -7,11 +7,8 @@ import org.instrucoes.TipoInstrucao;
 
 public abstract class InstrucaoRtype extends Instrucao {
 
-	protected int resultado;
 	protected String rsCode;
-	protected int rsValue;
 	protected String rtCode;
-	protected int rtValue;
 	protected String rdCode;
 
 	public InstrucaoRtype(String entrada) {
