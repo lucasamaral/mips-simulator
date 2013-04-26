@@ -20,8 +20,8 @@ public abstract class InstrucaoItype extends Instrucao {
 		immCode = dados.substring(16, 32);
 	}
 	
-	public int getValorRtCode(){
-		return Integer.parseInt(rtCode, 2);
+	public String getValorRtCode(){
+		return rtCode;
 	}
 	
 	@Override

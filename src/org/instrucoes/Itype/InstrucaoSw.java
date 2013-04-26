@@ -2,6 +2,7 @@ package org.instrucoes.Itype;
 
 import org.Processador;
 import org.instrucoes.CodigoInstrucao;
+import org.latches.LatchEXMEM;
 
 public class InstrucaoSw extends InstrucaoItype {
 
@@ -26,8 +27,8 @@ public class InstrucaoSw extends InstrucaoItype {
 		return 0;
 	}
 
-	public void memory(int valor, Processador proc) {
-		proc.carregarNaMemoria(valor, proc.pegardosRegistradores(rtCode));
+	public void memory(int valor, Processador proc, LatchEXMEM exMem) {
+		proc.carregarNaMemoria(valor, exMem.getValorEscreverNaMemoria());
 	}
 
 }

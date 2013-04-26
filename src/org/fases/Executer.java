@@ -27,6 +27,8 @@ public class Executer extends FasePadrao {
 			exMem.setZeroULA(instrucaoAtual.getCondicaoULA(processador));
 			exMem.setEnderecoSomado(instrucaoAtual
 					.getResultadoULAEndereco(processador));
+			//Adicionado por Assis
+			exMem.setValorEscreverNaMemoria(idEx.getValorLidoRtParaSalvarNaMemoria());
 		}
 		instrucaoAtual = null;
 	}

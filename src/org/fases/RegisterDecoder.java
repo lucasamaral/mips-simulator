@@ -1,6 +1,8 @@
 package org.fases;
 
 import org.Processador;
+import org.instrucoes.CodigoInstrucao;
+import org.instrucoes.Itype.InstrucaoSw;
 import org.latches.Latch;
 import org.latches.LatchIDEX;
 
@@ -22,6 +24,12 @@ public class RegisterDecoder extends FasePadrao {
 	@Override
 	public void executarPasso2() {
 		idEx.adicionarInstrucao(instrucaoAtual);
+		//adicionado por Assis
+		if(instrucaoAtual.getCodigo().equals(CodigoInstrucao.SW)){
+			InstrucaoSw instSw = (InstrucaoSw) instrucaoAtual.getInstrucao();
+			idEx.setValorLidoRtParaSalvarNaMemoria(processador.pegardosRegistradores(instSw.getValorRtCode()));
+		}
+		//até aqui
 		instrucaoAtual = null;
 	}
 
