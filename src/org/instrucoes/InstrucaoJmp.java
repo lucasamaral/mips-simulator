@@ -7,7 +7,7 @@ public class InstrucaoJmp extends Instrucao {
 
 	public InstrucaoJmp(String entrada) {
 		super(entrada);
-		tipo = TipoInstrucao.JMP;
+		codigo = CodigoInstrucao.JMP;
 	}
 
 	@Override

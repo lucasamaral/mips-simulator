@@ -5,7 +5,7 @@ import org.Processador;
 public class InstrucaoNop extends Instrucao {
 	public InstrucaoNop(String entrada) {
 		super(entrada);
-		tipo = TipoInstrucao.NOP;
+		codigo = CodigoInstrucao.NOP;
 	}
 
 	private byte[] rs;

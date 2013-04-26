@@ -7,7 +7,7 @@ public class InstrucaoSw extends Instrucao {
 
 	public InstrucaoSw(String entrada) {
 		super(entrada);
-		tipo = TipoInstrucao.SW;
+		codigo = CodigoInstrucao.SW;
 	}
 
 	@Override

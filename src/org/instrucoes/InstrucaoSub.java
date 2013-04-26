@@ -12,7 +12,7 @@ public class InstrucaoSub extends Instrucao {
 
 	public InstrucaoSub(String entrada) {
 		super(entrada);
-		tipo = TipoInstrucao.SUB;
+		codigo = CodigoInstrucao.SUB;
 	}
 
 	@Override

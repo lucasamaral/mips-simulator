@@ -6,7 +6,7 @@ public class InstrucaoBne extends Instrucao {
 
 	public InstrucaoBne(String entrada) {
 		super(entrada);
-		tipo = TipoInstrucao.BNE;
+		codigo = CodigoInstrucao.BNE;
 	}
 
 	@Override

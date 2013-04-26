@@ -7,7 +7,7 @@ public class InstrucaoLw extends Instrucao {
 
 	public InstrucaoLw(String entrada) {
 		super(entrada);
-		tipo = TipoInstrucao.LW;
+		codigo = CodigoInstrucao.LW;
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package org.instrucoes;
 
+import org.BancoDeRegistradores;
+
 public class InstrucaoWrapper {
 
 	private String dado;
@@ -13,10 +15,10 @@ public class InstrucaoWrapper {
 		return dado;
 	}
 
-	public TipoInstrucao getTipo() {
+	public CodigoInstrucao getTipo() {
 		if(instrucao!=null)
-			return instrucao.tipo;
-		return TipoInstrucao.NOP;
+			return instrucao.codigo;
+		return CodigoInstrucao.NOP;
 	}
 	
 	public String toString(){
@@ -29,6 +31,15 @@ public class InstrucaoWrapper {
 
 	public void setInstrucaoReal(Instrucao instrucaoReal) {
 		this.instrucao = instrucaoReal;
+	}
+
+	public TipoInstrucao getType() {
+		return instrucao.getType();
+	}
+
+	public void writeBack(BancoDeRegistradores banco, int valor) {
+		instrucao.writeBack(banco, valor);
+		
 	}
 	
 }

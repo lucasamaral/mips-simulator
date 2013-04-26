@@ -6,7 +6,7 @@ import org.instrucoes.InstrucaoWrapper;
 public abstract class FasePadrao implements Fase {
 
 	protected InstrucaoWrapper instrucaoAtual;
-	private Processador processador;
+	protected Processador processador;
 
 	public FasePadrao(Processador p) {
 		processador = p;
@@ -14,6 +14,10 @@ public abstract class FasePadrao implements Fase {
 
 	public String getNomeFase() {
 		return this.getClass().getName();
+	}
+	
+	public void carregarSinais(){
+		
 	}
 
 	@Override

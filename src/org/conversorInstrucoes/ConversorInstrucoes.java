@@ -1,7 +1,6 @@
 package org.conversorInstrucoes;
 
 import org.instrucoes.Instrucao;
-import org.instrucoes.InstrucaoAddi;
 import org.instrucoes.InstrucaoBeq;
 import org.instrucoes.InstrucaoBle;
 import org.instrucoes.InstrucaoBne;
@@ -9,6 +8,7 @@ import org.instrucoes.InstrucaoJmp;
 import org.instrucoes.InstrucaoLw;
 import org.instrucoes.InstrucaoNop;
 import org.instrucoes.InstrucaoSw;
+import org.instrucoes.Itype.InstrucaoAddi;
 import org.instrucoes.Rtype.InstrucaoAdd;
 import org.instrucoes.Rtype.InstrucaoMul;
 

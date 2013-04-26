@@ -7,7 +7,7 @@ public class InstrucaoBeq extends Instrucao {
 
 	public InstrucaoBeq(String entrada) {
 		super(entrada);
-		tipo = TipoInstrucao.BEQ;
+		codigo = CodigoInstrucao.BEQ;
 	}
 
 	@Override

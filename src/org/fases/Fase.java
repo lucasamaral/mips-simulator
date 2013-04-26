@@ -11,4 +11,6 @@ public interface Fase {
 
 	public void executarPasso2();
 
+	public void carregarSinais();
+
 }

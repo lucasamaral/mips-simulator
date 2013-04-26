@@ -17,11 +17,14 @@ import org.latches.LatchIFID;
 import org.latches.LatchMEMWB;
 
 public class Processador {
+	
+	private CentralSinais centralSinais;
+	private int pc;
 	private MemoriaDados memoria;
 	private BancoDeRegistradores registradores;
 	private MemoriaInstrucoes instrucoes;
 	private List<InstrucaoWrapper> instrucoesCompletadas = new LinkedList<>();
-	private Latch ifId;
+	private LatchIFID ifId;
 	private LatchIDEX idEx;
 	private LatchEXMEM exMem;
 	private LatchMEMWB memWb;
@@ -32,6 +35,7 @@ public class Processador {
 		this.memoria = (mem);
 		this.registradores = (new BancoDeRegistradores());
 		this.instrucoes = (ins);
+		setPc(0);
 		construirLatches();
 		fases = construirFases();
 	}
@@ -54,11 +58,14 @@ public class Processador {
 	}
 
 	public void step() {
-		for (int i = fases.length - 1; i >= 0; i--) {
-			fases[i].executarPasso1();
+		for (Fase f : fases) {
+			f.carregarSinais();
 		}
-		for (int i = fases.length - 1; i >= 0; i--) {
-			fases[i].executarPasso2();
+		for (Fase f : fases) {
+			f.executarPasso1();
+		}
+		for (Fase f : fases) {
+			f.executarPasso2();
 		}
 	}
 
@@ -97,6 +104,18 @@ public class Processador {
 
 	public void sinalizarFimdePrograma() {
 		this.fimDePrograma = true;
+	}
+
+	public int getPc() {
+		return pc;
+	}
+
+	public void setPc(int pc) {
+		this.pc = pc;
+	}
+
+	public boolean temDependencia(InstrucaoWrapper instrucaoAtual) {
+		return false;
 	}
 
 }

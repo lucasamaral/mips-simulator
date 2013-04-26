@@ -6,7 +6,7 @@ public class InstrucaoBle extends Instrucao {
 
 	public InstrucaoBle(String entrada) {
 		super(entrada);
-		tipo = TipoInstrucao.BLE;
+		codigo = CodigoInstrucao.BLE;
 	}
 
 	@Override

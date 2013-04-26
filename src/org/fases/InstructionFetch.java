@@ -8,11 +8,16 @@ import org.latches.Latch;
 public class InstructionFetch extends FasePadrao {
 
 	private Latch ifId;
-	private int pc = 0;
+	private int internalPc = 0;
 
 	public InstructionFetch(Processador p, Latch ifId) {
 		super(p);
 		this.ifId = ifId;
+	}
+	
+	@Override
+	public void carregarSinais(){
+		internalPc = processador.getPc();
 	}
 
 	@Override
@@ -20,26 +25,22 @@ public class InstructionFetch extends FasePadrao {
 		String dadosInstrucao = null;
 		try {
 			dadosInstrucao = this.getProcessador().getInstrucoes()
-					.getInstrucao(pc);
+					.getInstrucao(internalPc);
 		} catch (ArrayIndexOutOfBoundsException e) {
-			this.getProcessador().sinalizarFimdePrograma();
-			System.out.println(getNomeFase() + " sinalizando fim de programa");
+			processador.sinalizarFimdePrograma();
 			return;
 		}
-		pc += 4;
 		instrucaoAtual = new InstrucaoWrapper(dadosInstrucao);
 		instrucaoAtual.setInstrucaoReal(ConversorInstrucoes.converterInstrucao(instrucaoAtual.getDado()));
 	}
 	
 	public void executarPasso2(){
 		super.executarPasso2();
-		processar(instrucaoAtual);
-		ifId.adicionarInstrucao(instrucaoAtual);
-		instrucaoAtual = null;
-	}
-
-	private void processar(InstrucaoWrapper instrucaoAtual) {
-		// TODO Auto-generated method stub
+		if(!processador.temDependencia(instrucaoAtual)){
+			processador.setPc(internalPc+4);
+			ifId.adicionarInstrucao(instrucaoAtual);
+			instrucaoAtual = null;
+		}
 	}
 
 }
