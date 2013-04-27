@@ -1,5 +1,6 @@
 package org;
 
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -62,6 +63,7 @@ public class Desenhador extends JPanel {
 		this.p = p;
 		
 		setLayout(new GridBagLayout());
+		c.anchor = GridBagConstraints.WEST;
 		c.insets = insets;
 
 		// todos os botoes na primeira linha
@@ -141,7 +143,7 @@ public class Desenhador extends JPanel {
 		add(ALUSrc, c);
 		
 		// Separador
-		c.insets = new Insets(20, 0, 0, 0);
+		c.insets = new Insets(10, 0, 0, 0);
 		c.gridy++;
 		add(new JLabel(""), c);
 		c.insets = insets;
@@ -166,37 +168,34 @@ public class Desenhador extends JPanel {
 		// Informacoes
 		c.gridy = 9;
 		c.gridx = 6;
-		add(new JLabel("Clock corrente"), c);
+		add(new JLabel("Clock corrente:"), c);
 		c.gridx = 8;
 		add(clock, c);
 		
 		c.gridy++;
 		c.gridx = 6;
-		add(new JLabel("PC"), c);
+		add(new JLabel("PC:"), c);
 		c.gridx = 8;
 		add(pc, c);
 		
 		c.gridy++;
 		c.gridx = 6;
-		add(new JLabel("Número de instruções concluídas"), c);
+		add(new JLabel("Número de instruções concluídas:"), c);
 		c.gridx = 8;
 		add(numInstConcluidas, c);
 		
 		c.gridy++;
 		c.gridx = 6;
-		add(new JLabel("Produtividade do pipeline"), c);
+		add(new JLabel("Produtividade do pipeline:"), c);
 		c.gridx = 8;
 		add(produtividade, c);
 		
-		c.gridy += 2;
-		c.insets = new Insets(30, 0, 0, 0);
-		add(new JLabel(""), c);
-		c.insets = insets;
-		
 		// Registradores
-		c.gridy++;
+		c.gridy = 15;
 		c.gridx = 0;
+		c.insets = new Insets(15, 10, 0, 0);
 		add(new JLabel("Registradores"), c);
+		c.insets = insets;
 		
 		c.gridwidth = 1;
 		for (int i = 0; i < 32; i++) {
@@ -211,8 +210,8 @@ public class Desenhador extends JPanel {
 		setVisible(true);
 	}
 	
-	public void update() {
-		p.step();
+	public void paint(Graphics g) {
+		super.paint(g);
 		
 		if (p.isFinished())
 			botaoProximo.setEnabled(false);
@@ -225,9 +224,13 @@ public class Desenhador extends JPanel {
 				fases[i].setText(inst.getDesc());
 		}
 		
-		clock.setText(String.valueOf(p.getClock()));
-		pc.setText(String.valueOf(p.getPc()));
-		numInstConcluidas.setText(String.valueOf(p.instrucoesCompletadas.size()));
+		int clock = p.getClock();
+		int numInstConcluidas = p.instrucoesCompletadas.size();
+		float produtividade = clock > 0 ? (float)numInstConcluidas/clock : 0;
+		this.clock.setText(String.valueOf(clock));
+		this.pc.setText(String.valueOf(p.getPc()));
+		this.numInstConcluidas.setText(String.valueOf(numInstConcluidas));
+		this.produtividade.setText(String.format("%.5f", produtividade));
 		
 		for (int i = 0; i < 32; i++)
 			registradores[i].setText(String.valueOf(p.pegardosRegistradores(Integer.toBinaryString(i))));
@@ -240,6 +243,10 @@ public class Desenhador extends JPanel {
 			this.endRecentes[i].setText(String.valueOf(mem));
 			this.valRecentes[i].setText(String.valueOf(p.memoria.getValue(mem)));
 		}
+	}
+	
+	public void update() {
+		p.step();
 		
 		repaint();
 	}
