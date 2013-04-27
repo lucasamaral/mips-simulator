@@ -24,7 +24,7 @@ public class Main {
 			}
 		}
 		p.gerarLog();
-		System.out.println("Projeto Paulo André");
+		System.out.println("Projeto Paulo Andr��");
 	}
 
 	private static void inicializarInterface(Processador p) {
@@ -44,20 +44,7 @@ public class Main {
 
 	private static JFrame criaFrame() {
 		JFrame f = new JFrame("MIPS Simulator");
-		f.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				System.exit(0);
-			}
-
-			@Override
-			public void windowDeiconified(WindowEvent e) {
-			}
-
-			@Override
-			public void windowIconified(WindowEvent e) {
-			}
-		});
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		return f;
 	}
 }

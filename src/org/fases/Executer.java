@@ -18,26 +18,36 @@ public class Executer extends FasePadrao {
 
 	@Override
 	public void executarPasso1() {
+		if (instrucaoAtual != null) {
+			instrucaoAtual.getInstrucao().decrementarNumerodeClocks();
+		}
 	}
 
 	@Override
 	public void executarPasso2() {
-		if(instrucaoAtual!=null){
-			exMem.adicionarInstrucao(instrucaoAtual);
-			exMem.setResultadoULA(instrucaoAtual.getResultadoULA(processador));
-			exMem.setZeroULA(instrucaoAtual.getCondicaoULA(processador));
-			exMem.setEnderecoSomado(instrucaoAtual
-					.getResultadoULAEndereco(processador));
-			//Adicionado por Assis
-			exMem.setValorEscreverNaMemoria(valorLidoRtParaSalvarNaMemoria);
+		if (instrucaoAtual != null
+				&& instrucaoAtual.getInstrucao().getNumeroClocks() <= 0) {
+			if (instrucaoAtual != null) {
+				exMem.adicionarInstrucao(instrucaoAtual);
+				exMem.setResultadoULA(instrucaoAtual
+						.getResultadoULA(processador));
+				exMem.setZeroULA(instrucaoAtual.getCondicaoULA(processador));
+				exMem.setEnderecoSomado(instrucaoAtual
+						.getResultadoULAEndereco(processador));
+				// Adicionado por Assis
+				exMem.setValorEscreverNaMemoria(valorLidoRtParaSalvarNaMemoria);
+			}
+			instrucaoAtual = null;
 		}
-		instrucaoAtual = null;
 	}
 
 	@Override
 	public void carregarSinais() {
-		instrucaoAtual = idEx.pegarInstrucao();
-		valorLidoRtParaSalvarNaMemoria = idEx.getValorLidoRtParaSalvarNaMemoria();
+		if (instrucaoAtual == null) {
+			instrucaoAtual = idEx.pegarInstrucao();
+			valorLidoRtParaSalvarNaMemoria = idEx
+					.getValorLidoRtParaSalvarNaMemoria();
+		}
 	}
 
 }

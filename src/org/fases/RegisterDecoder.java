@@ -23,6 +23,9 @@ public class RegisterDecoder extends FasePadrao {
 
 	@Override
 	public void executarPasso2() {
+		if(idEx.hasInstruction()){
+			return;
+		}
 		idEx.adicionarInstrucao(instrucaoAtual);
 		// adicionado por Assis
 		if (instrucaoAtual != null
@@ -37,7 +40,9 @@ public class RegisterDecoder extends FasePadrao {
 
 	@Override
 	public void carregarSinais() {
-		instrucaoAtual = ifId.pegarInstrucao();
+		if(instrucaoAtual == null){
+			instrucaoAtual = ifId.pegarInstrucao();
+		}
 	}
 
 }

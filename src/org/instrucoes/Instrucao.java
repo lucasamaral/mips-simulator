@@ -9,10 +9,18 @@ public abstract class Instrucao {
 	protected String dados;
 	protected CodigoInstrucao codigo;
 	protected TipoInstrucao tipo;
-	protected int numeroDeClocks;
+	protected int numeroDeClocks = 1;
 
 	public Instrucao(String entrada) {
 		dados = entrada;
+	}
+	
+	public int getNumeroClocks(){
+		return numeroDeClocks;
+	}
+	
+	public void decrementarNumerodeClocks(){
+		numeroDeClocks--;
 	}
 
 	public abstract void writeBack(Processador banco, int valorULA,
