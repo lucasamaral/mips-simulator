@@ -19,6 +19,7 @@ import org.fases.MemoryAccess;
 import org.fases.RegisterDecoder;
 import org.fases.WriteBack;
 import org.instrucoes.InstrucaoWrapper;
+import org.instrucoes.Rtype.InstrucaoNop;
 import org.latches.LatchEXMEM;
 import org.latches.LatchIDEX;
 import org.latches.LatchIFID;
@@ -54,6 +55,12 @@ public class Processador {
 	public void adicionarInstrucaoCompletada(InstrucaoWrapper inst) {
 		if (inst != null)
 			instrucoesCompletadas.add(inst);
+		else{
+			InstrucaoWrapper ins = new InstrucaoWrapper("");
+			ins.setInstrucaoReal(new InstrucaoNop("000000000000000000000000"));
+			instrucoesCompletadas.add(ins);
+		}
+		
 	}
 
 	private void construirLatches() {
@@ -163,6 +170,8 @@ public class Processador {
 		Charset encoding = StandardCharsets.UTF_8;
 		Path path = Paths.get("Saida-programa.txt");
 		try (BufferedWriter writer = Files.newBufferedWriter(path, encoding)) {
+			writer.write("Numero de clocks: "+clockCount);
+			writer.newLine();
 			writer.write("Instrucoes executadas:");
 			writer.newLine();
 			for (InstrucaoWrapper line : instrucoesCompletadas) {

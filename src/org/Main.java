@@ -18,7 +18,8 @@ public class Main {
 		inicializarInterface(p);
 		while(!p.isFinished()){
 			try {
-				Thread.sleep(1000);
+				p.step();
+				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
