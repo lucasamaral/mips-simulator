@@ -9,19 +9,19 @@ public class WriteBack extends FasePadrao {
 	private int resultadoULA;
 	private int resultadoMem;
 
-	public WriteBack(Processador p,LatchMEMWB memWb) {
+	public WriteBack(Processador p, LatchMEMWB memWb) {
 		super(p);
 		this.memWb = memWb;
 	}
 
 	@Override
-	public void executarPasso1(){
+	public void executarPasso1() {
 	}
-	
+
 	@Override
 	public void executarPasso2() {
-		if(instrucaoAtual!=null){
-			instrucaoAtual.writeBack(processador,resultadoULA,resultadoMem);
+		if (instrucaoAtual != null) {
+			instrucaoAtual.writeBack(processador, resultadoULA, resultadoMem);
 		}
 		processador.adicionarInstrucaoCompletada(instrucaoAtual);
 		instrucaoAtual = null;
@@ -32,6 +32,26 @@ public class WriteBack extends FasePadrao {
 		instrucaoAtual = memWb.pegarInstrucao();
 		resultadoULA = memWb.getResultadoULA();
 		resultadoMem = memWb.getResultadoMem();
+		if (instrucaoAtual != null) {
+			switch (instrucaoAtual.getCodigo()) {
+			case ADD:
+			case ADDI:
+			case MUL:
+			case SUB:
+				processador.setSinal("regWrite", true);
+				break;
+			case LW:
+				processador.setSinal("memToReg", true);
+				processador.setSinal("regWrite", true);
+				break;
+			default:
+				processador.setSinal("memToReg", false);
+				processador.setSinal("regWrite", false);
+			}
+		} else {
+			processador.setSinal("memToReg", false);
+			processador.setSinal("regWrite", false);
+		}
 	}
 
 }

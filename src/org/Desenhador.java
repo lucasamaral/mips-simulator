@@ -228,10 +228,10 @@ public class Desenhador extends JPanel {
 		this.regDst.setText(String.valueOf(p.getSinal("regDst")));
 		this.ALUSrc.setText(String.valueOf(p.getSinal("ALUSrc")));
 		this.branch.setText(String.valueOf(p.getSinal("branch")));
-		this.memRead.setText(String.valueOf(true));
-		this.memWrite.setText(String.valueOf(true));
-		this.regWrite.setText(String.valueOf(true));
-		this.memToReg.setText(String.valueOf(true));
+		this.memRead.setText(String.valueOf(p.getSinal("memRead")));
+		this.memWrite.setText(String.valueOf(p.getSinal("memWrite")));
+		this.regWrite.setText(String.valueOf(p.getSinal("regWrite")));
+		this.memToReg.setText(String.valueOf(p.getSinal("memToReg")));
 		
 		for (int i = 0; i < 32; i++)
 			registradores[i].setText(String.valueOf(p.pegardosRegistradores(Integer.toBinaryString(i))));

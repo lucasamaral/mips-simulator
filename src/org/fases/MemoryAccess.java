@@ -54,10 +54,26 @@ public class MemoryAccess extends FasePadrao {
 	@Override
 	public void carregarSinais() {
 		instrucaoAtual = exMem.pegarInstrucao();
-		if(instrucaoAtual!=null){
+		if (instrucaoAtual != null) {
 			processador.setSinal("branch", instrucaoAtual.isBranch());
-		}else{
+			switch (instrucaoAtual.getCodigo()) {
+			case LW:
+				processador.setSinal("memRead", true);
+				processador.setSinal("memWrite", false);
+				break;
+			case SW:
+				processador.setSinal("memRead", false);
+				processador.setSinal("memWrite", true);
+				break;
+			default:
+				processador.setSinal("memRead", false);
+				processador.setSinal("memWrite", false);
+				break;
+			}
+		} else {
 			processador.setSinal("branch", false);
+			processador.setSinal("memRead", false);
+			processador.setSinal("memWrite", false);
 		}
 		zeroULA = exMem.getZeroULA();
 		possivelProximoEndereco = exMem.getProximoEndereco();

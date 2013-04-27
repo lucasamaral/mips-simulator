@@ -247,6 +247,9 @@ public class Processador {
 		setSinal("ALUSrc", false);
 		setSinal("regDst", false);
 		setSinal("branch", false);
+		setSinal("memRead", false);
+		setSinal("memWrite", false);
+		setSinal("regWrite", false);
 		for (InstrucaoWrapper registrador : dependenciasInstrucoes.keySet()) {
 			dependenciasInstrucoes.put(registrador,
 					dependenciasInstrucoes.get(registrador) - 1);
@@ -256,12 +259,12 @@ public class Processador {
 		}
 	}
 
-	public void setSinal(String nome,boolean valor){
+	public void setSinal(String nome, boolean valor) {
 		centralSinais.setSinal(nome, valor);
 	}
-	
-	public boolean getSinal(String nome){
+
+	public boolean getSinal(String nome) {
 		return centralSinais.getSinal(nome);
 	}
-	
+
 }
