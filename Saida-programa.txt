@@ -1,4 +1,4 @@
-Numero de clocks: 124
+Numero de clocks: 69
 Instrucoes executadas:
 ADDI
 SW

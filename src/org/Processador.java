@@ -82,11 +82,9 @@ public class Processador {
 			f.executarPasso1();
 		}
 		for (Fase f : fases) {
-			System.out.println(f + " -" + f.getInstrucaoAtual());
 			f.executarPasso2();
 		}
 		clockCount++;
-		System.out.println(pc);
 		InstrucaoWrapper ins = fases[2].getInstrucaoAtual();
 		if (ins == null || ins.getInstrucao().getNumeroClocks() < 1) {
 			for (InstrucaoWrapper registrador : dependenciasInstrucoes.keySet()) {
@@ -112,7 +110,6 @@ public class Processador {
 	public void processar() {
 		do {
 			step();
-			System.out.println("");
 		} while (!isFinished());
 	}
 
@@ -139,7 +136,6 @@ public class Processador {
 	public boolean temDependencia(InstrucaoWrapper instrucaoAtual) {
 		for (Integer p : instrucaoAtual.getDependenciasRead()) {
 			if (existeDependencia(p)) {
-				System.out.println("Opa, tem dependencia");
 				temDependencia = true;
 				return true;
 			}

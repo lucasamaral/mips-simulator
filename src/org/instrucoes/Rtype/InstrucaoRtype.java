@@ -26,7 +26,6 @@ public abstract class InstrucaoRtype extends Instrucao {
 
 	@Override
 	public void writeBack(Processador banco, int valorULA, int valorMem) {
-		System.out.println("Carregando " + valorULA + " em " + rdCode);
 		banco.carregarNosRegistradores(rdCode, valorULA);
 	}
 

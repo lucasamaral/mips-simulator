@@ -9,14 +9,10 @@ public class BancoDeRegistradores {
 	}
 
 	private void writeRegister(int endereco, int value) {
-		System.out.println("Escrevendo no registrador - " + endereco + " - "
-				+ value);
 		registros[endereco] = value;
 	}
 
 	private int readRegister(int endereco) {
-		System.out.println("Lendo no registrador - " + endereco + " - "
-				+ registros[endereco]);
 		return registros[endereco];
 	}
 

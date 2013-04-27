@@ -9,6 +9,7 @@ public class Executer extends FasePadrao {
 	private LatchIDEX idEx;
 	private LatchEXMEM exMem;
 	private int valorLidoRtParaSalvarNaMemoria;
+	private int valorInicialDeClocks;
 
 	public Executer(Processador p, LatchIDEX idEx, LatchEXMEM exMem) {
 		super(p);
@@ -26,7 +27,7 @@ public class Executer extends FasePadrao {
 	@Override
 	public void executarPasso2() {
 		if (instrucaoAtual != null
-				&& instrucaoAtual.getInstrucao().getNumeroClocks() <= 0) {
+				&& instrucaoAtual.getInstrucao().getNumeroClocks() == valorInicialDeClocks - 1) {
 			if (instrucaoAtual != null) {
 				exMem.adicionarInstrucao(instrucaoAtual);
 				exMem.setResultadoULA(instrucaoAtual
@@ -45,6 +46,9 @@ public class Executer extends FasePadrao {
 	public void carregarSinais() {
 		if (instrucaoAtual == null) {
 			instrucaoAtual = idEx.pegarInstrucao();
+			if (instrucaoAtual != null)
+				valorInicialDeClocks = instrucaoAtual.getInstrucao()
+						.getNumeroClocks();
 			valorLidoRtParaSalvarNaMemoria = idEx
 					.getValorLidoRtParaSalvarNaMemoria();
 		}

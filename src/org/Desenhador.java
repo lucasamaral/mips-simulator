@@ -77,7 +77,15 @@ public class Desenhador extends JPanel {
 		botaoRodar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				run = true;
-				update();
+				while(run){
+					try {
+						Thread.sleep(300);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					update();
+				}
 			}
 		});
 		add(botaoRodar, c);

@@ -3,6 +3,7 @@ package org;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.instrucoes.CodigoInstrucao;
 import org.instrucoes.InstrucaoWrapper;
 
 public class ProcessadorBypassing extends Processador {
@@ -16,8 +17,11 @@ public class ProcessadorBypassing extends Processador {
 
 	@Override
 	public void step() {
-		for (InstrucaoWrapper ins : posicaoAtual.keySet()) {
-			posicaoAtual.put(ins, posicaoAtual.get(ins) + 1);
+		InstrucaoWrapper ins = fases[2].getInstrucaoAtual();
+		if (ins == null || ins.getInstrucao().getNumeroClocks() < 1) {
+			for (InstrucaoWrapper insp : posicaoAtual.keySet()) {
+				posicaoAtual.put(insp, posicaoAtual.get(insp) + 1);
+			}
 		}
 		super.step();
 	}
@@ -50,29 +54,19 @@ public class ProcessadorBypassing extends Processador {
 	@Override
 	public int pegardosRegistradores(String endereco) {
 		int end = Integer.parseInt(endereco, 2);
-		if (existeDependencia(end)) {
-			for (InstrucaoWrapper ins : dependencias.get(end)) {
-				int pos = posicaoAtual.get(ins);
-				if (pos < 5) {
-					switch (ins.getCodigo()) {
-					case LW:
-						System.out.println("Pegando da memoria");
-						return memWb.getResultadoMem();
-					default:
-						System.out.println("Pegando da ULA");
-						switch (pos) {
-						case 3:
-							return exMem.getResultadoULA();
-						case 4:
-							return memWb.getResultadoULA();
-						}
-					}
-				}
-			}
+		if (fases[3].getInstrucaoAtual() != null
+				&& fases[3].getInstrucaoAtual().getDependenciasWrite()
+						.contains(end)) {
 			return exMem.getResultadoULA();
-		} else {
-			return super.pegardosRegistradores(endereco);
 		}
+		if (fases[4].getInstrucaoAtual() != null
+				&& fases[4].getInstrucaoAtual().getDependenciasWrite()
+						.contains(end)) {
+			if (fases[4].getInstrucaoAtual().getCodigo() == CodigoInstrucao.LW)
+				return memWb.getResultadoMem();
+			return memWb.getResultadoULA();
+		}
+		return super.pegardosRegistradores(endereco);
 
 	}
 

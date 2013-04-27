@@ -1,8 +1,6 @@
 package org;
 
 import java.awt.Dimension;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -14,7 +12,7 @@ public class Main {
 	public static void main(String[] args) {
 		String[] instrucoes = gerarAsInstrucoes();
 		MemoriaInstrucoes memIns = new MemoriaInstrucoes(instrucoes);
-		Processador p = new Processador(new MemoriaDados(), memIns);
+		Processador p = new ProcessadorBypassing(new MemoriaDados(), memIns);
 		p.initialStep();
 		inicializarInterface(p);
 		while(!p.isFinished()){
@@ -25,7 +23,6 @@ public class Main {
 			}
 		}
 		p.gerarLog();
-		System.out.println("Projeto Paulo Andr��");
 	}
 
 	private static void inicializarInterface(Processador p) {
