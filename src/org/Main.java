@@ -46,7 +46,7 @@ public class Main {
 
 	private static String[] gerarAsInstrucoes() {
 		//return GeradorInstrucoesPrograma.gerarProgramadeArquivo("instrucoes.txt");
-		GeradorArquivoInstrucoes.gerarArquivo("programa.txt", "compilado.txt");
+		GeradorArquivoInstrucoes.gerarArquivo("programa-escrito.txt", "compilado.txt");
 		return GeradorInstrucoesPrograma.gerarProgramadeArquivo("compilado.txt");
 	}
 
