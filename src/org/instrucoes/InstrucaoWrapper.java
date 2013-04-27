@@ -16,6 +16,12 @@ public class InstrucaoWrapper {
 	public String getDado() {
 		return dado;
 	}
+	
+	public String getDesc() {
+		if (instrucao == null)
+			return "NOP";
+		return dado.substring(dado.indexOf(";") + 2);
+	}
 
 	public CodigoInstrucao getCodigo() {
 		if(instrucao!=null)

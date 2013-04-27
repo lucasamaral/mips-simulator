@@ -116,6 +116,10 @@ public class Processador {
 		this.fimDePrograma = true;
 	}
 
+	public int getClock() {
+		return clockCount;
+	}
+	
 	public int getPc() {
 		return pc;
 	}
