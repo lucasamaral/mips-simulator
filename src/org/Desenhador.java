@@ -1,6 +1,5 @@
 package org;
 
-import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -204,9 +203,8 @@ public class Desenhador extends JPanel {
 		setVisible(true);
 	}
 	
-	@Override
-	public void paint(Graphics g) {
-		super.paint(g);
+	public void update() {
+		p.step();
 		
 		if (p.isFinished())
 			botaoProximo.setEnabled(false);
@@ -221,6 +219,7 @@ public class Desenhador extends JPanel {
 		
 		clock.setText(String.valueOf(p.getClock()));
 		pc.setText(String.valueOf(p.getPc()));
+		numInstConcluidas.setText(String.valueOf(p.instrucoesCompletadas.size()));
 		
 		for (int i = 0; i < 32; i++)
 			registradores[i].setText(String.valueOf(p.pegardosRegistradores(Integer.toBinaryString(i))));
@@ -234,20 +233,6 @@ public class Desenhador extends JPanel {
 			this.valRecentes[i].setText(String.valueOf(p.memoria.getValue(mem)));
 		}
 		
-//		if (run)
-//			repaint();
-	}
-	
-	public void update() {
-		p.step();
 		repaint();
-//		if (run) {
-//			try {
-//				Thread.sleep(1000);
-//			} catch (InterruptedException e) {
-//				e.printStackTrace();
-//			}
-//			update();
-//		}
 	}
 }
