@@ -18,6 +18,9 @@ public class MemoriaDados {
 	}
 
 	public void setValue(int endereco, int value) {
+		if(ultimosEnderecosUtlizados.contains(endereco)){
+			ultimosEnderecosUtlizados.remove(endereco);
+		}
 		ultimosEnderecosUtlizados.add(endereco);
 		valores.put(endereco, value);
 	}

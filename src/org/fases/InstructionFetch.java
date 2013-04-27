@@ -18,10 +18,6 @@ public class InstructionFetch extends FasePadrao {
 	@Override
 	public void carregarSinais() {
 		internalPc = processador.getPc();
-	}
-
-	@Override
-	public void executarPasso1() {
 		String dadosInstrucao = null;
 		try {
 			dadosInstrucao = this.getProcessador().getInstrucoes()
@@ -34,8 +30,12 @@ public class InstructionFetch extends FasePadrao {
 				.converterInstrucao(instrucaoAtual.getDado()));
 	}
 
+	@Override
+	public void executarPasso1() {
+	}
+
 	public void executarPasso2() {
-		if(ifId.hasInstruction()){
+		if (ifId.hasInstruction()) {
 			processador.naoIncrementarPc();
 			return;
 		}

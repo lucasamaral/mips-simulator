@@ -55,14 +55,9 @@ public class Processador {
 	}
 
 	public void adicionarInstrucaoCompletada(InstrucaoWrapper inst) {
-		if (inst != null)
+		if (inst != null) {
 			instrucoesCompletadas.add(inst);
-		else {
-			InstrucaoWrapper ins = new InstrucaoWrapper("");
-			ins.setInstrucaoReal(new InstrucaoNop("000000000000000000000000"));
-			instrucoesCompletadas.add(ins);
 		}
-
 	}
 
 	private void construirLatches() {
@@ -83,13 +78,6 @@ public class Processador {
 	}
 
 	public void step() {
-		for (InstrucaoWrapper registrador : dependenciasInstrucoes.keySet()) {
-			dependenciasInstrucoes.put(registrador,
-					dependenciasInstrucoes.get(registrador) - 1);
-		}
-		for (Fase f : fases) {
-			f.carregarSinais();
-		}
 		for (Fase f : fases) {
 			f.executarPasso1();
 		}
@@ -99,6 +87,16 @@ public class Processador {
 		}
 		clockCount++;
 		System.out.println(pc);
+		InstrucaoWrapper ins = fases[2].getInstrucaoAtual();
+		if (ins == null || ins.getInstrucao().getNumeroClocks() < 1) {
+			for (InstrucaoWrapper registrador : dependenciasInstrucoes.keySet()) {
+				dependenciasInstrucoes.put(registrador,
+						dependenciasInstrucoes.get(registrador) - 1);
+			}
+		}
+		for (Fase f : fases) {
+			f.carregarSinais();
+		}
 	}
 
 	public boolean isFinished() {
@@ -129,7 +127,7 @@ public class Processador {
 	public int getClock() {
 		return clockCount;
 	}
-	
+
 	public int getPc() {
 		return pc;
 	}
@@ -151,9 +149,9 @@ public class Processador {
 	}
 
 	protected boolean existeDependencia(int end) {
-		if(dependencias.containsKey(end)){
-			for(InstrucaoWrapper ins : dependencias.get(end)){
-				if(dependenciasInstrucoes.get(ins)>0)
+		if (dependencias.containsKey(end)) {
+			for (InstrucaoWrapper ins : dependencias.get(end)) {
+				if (dependenciasInstrucoes.get(ins) > 0)
 					return true;
 			}
 		}
@@ -245,6 +243,16 @@ public class Processador {
 
 	public void naoIncrementarPc() {
 		temDependencia = true;
+	}
+
+	public void initialStep() {
+		for (InstrucaoWrapper registrador : dependenciasInstrucoes.keySet()) {
+			dependenciasInstrucoes.put(registrador,
+					dependenciasInstrucoes.get(registrador) - 1);
+		}
+		for (Fase f : fases) {
+			f.carregarSinais();
+		}
 	}
 
 }
