@@ -7,6 +7,8 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Iterator;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -17,52 +19,81 @@ import org.instrucoes.InstrucaoWrapper;
 public class Desenhador extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private Processador p;
-	
+	private Rodador rodador;
+	private ExecutorService es = Executors.newCachedThreadPool();
+
+	class Rodador implements Runnable {
+
+		private Processador p;
+		private boolean podeRodar;
+
+		public Rodador(Processador p) {
+			this.p = p;
+		}
+
+		@Override
+		public void run() {
+			iniciar();
+			while (podeRodar && !p.isFinished()) {
+				p.step();
+			}
+		}
+
+		public void iniciar() {
+			podeRodar = true;
+		}
+
+		public void pausar() {
+			podeRodar = false;
+		}
+
+	}
+
 	// Controle do programa
 	private boolean run = false;
-	
+
 	// Botoes de controle
 	private JButton botaoProximo = new JButton("Próximo");
 	private JButton botaoRodar = new JButton("Rodar");
 	private JButton botaoPausar = new JButton("Pausar");
 	private JButton botaoAbrir = new JButton("Abrir");
-	
+
 	// Id. de instruções
 	private JLabel[] fases = new JLabel[5];
-	
+
 	// Sinais de controle
 	private JLabel regDst = new JLabel();
 	private JLabel ALUOp1 = new JLabel();
 	private JLabel ALUOp2 = new JLabel();
 	private JLabel ALUSrc = new JLabel();
-	
+
 	private JLabel branch = new JLabel();
 	private JLabel memRead = new JLabel();
 	private JLabel memWrite = new JLabel();
-	
+
 	private JLabel regWrite = new JLabel();
 	private JLabel memToReg = new JLabel();
 	private JLabel pcScr = new JLabel();
-	
+
 	// Memoria recente usada
 	private JLabel[] endRecentes = new JLabel[4];
 	private JLabel[] valRecentes = new JLabel[4];
-	
+
 	// Informacoes
 	private JLabel clock = new JLabel();
 	private JLabel pc = new JLabel();
 	private JLabel numInstConcluidas = new JLabel();
 	private JLabel produtividade = new JLabel();
-	
+
 	// Registradores
 	private JLabel[] registradores = new JLabel[32];
-	
 
 	public Desenhador(Processador p) {
+		rodador = new Rodador(p);
 		GridBagConstraints c = new GridBagConstraints();
 		Insets insets = new Insets(5, 10, 5, 10);
 		this.p = p;
-		
+
 		setLayout(new GridBagLayout());
 		c.anchor = GridBagConstraints.WEST;
 		c.insets = insets;
@@ -83,11 +114,25 @@ public class Desenhador extends JPanel {
 			}
 		});
 		add(botaoRodar, c);
+		botaoRodar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				es.submit(rodador);
+			}
+		});
 		add(botaoPausar, c);
+		botaoPausar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				rodador.pausar();
+			}
+		});
 		add(botaoAbrir, c);
-		
+
 		c.anchor = GridBagConstraints.WEST;
-		
+
 		// Id. das instruções
 		c.gridy++;
 		add(new JLabel("Id. da Inst. em IF"), c);
@@ -95,14 +140,14 @@ public class Desenhador extends JPanel {
 		add(new JLabel("Id. da Inst. em EX"), c);
 		add(new JLabel("Id. da Inst. em MEM"), c);
 		add(new JLabel("Id. da Inst. em WB"), c);
-		
+
 		// Labels dos Id. das instruçoes
 		c.gridy++;
 		for (int i = 0; i < 5; i++) {
 			fases[i] = new JLabel();
 			add(fases[i], c);
 		}
-		
+
 		c.gridx = 4;
 		c.gridy = 3;
 		c.gridwidth = 1;
@@ -136,13 +181,13 @@ public class Desenhador extends JPanel {
 		add(ALUSrc, c);
 		add(new JLabel("PCSrc"), c);
 		add(pcScr, c);
-		
+
 		// Separador
 		c.insets = new Insets(10, 0, 0, 0);
 		c.gridy++;
 		add(new JLabel(""), c);
 		c.insets = insets;
-		
+
 		// Memoria recente usada
 		c.gridwidth = 2;
 		c.gridx = GridBagConstraints.RELATIVE;
@@ -151,7 +196,7 @@ public class Desenhador extends JPanel {
 		c.gridy++;
 		add(new JLabel("Endereço"), c);
 		add(new JLabel("Valor"), c);
-		
+
 		for (int i = 0; i < 4; i++) {
 			c.gridy++;
 			endRecentes[i] = new JLabel();
@@ -159,39 +204,39 @@ public class Desenhador extends JPanel {
 			add(endRecentes[i], c);
 			add(valRecentes[i], c);
 		}
-		
+
 		// Informacoes
 		c.gridy = 9;
 		c.gridx = 6;
 		add(new JLabel("Clock corrente:"), c);
 		c.gridx = 8;
 		add(clock, c);
-		
+
 		c.gridy++;
 		c.gridx = 6;
 		add(new JLabel("PC:"), c);
 		c.gridx = 8;
 		add(pc, c);
-		
+
 		c.gridy++;
 		c.gridx = 6;
 		add(new JLabel("Número de instruções concluídas:"), c);
 		c.gridx = 8;
 		add(numInstConcluidas, c);
-		
+
 		c.gridy++;
 		c.gridx = 6;
 		add(new JLabel("Produtividade do pipeline:"), c);
 		c.gridx = 8;
 		add(produtividade, c);
-		
+
 		// Registradores
 		c.gridy = 15;
 		c.gridx = 0;
 		c.insets = new Insets(15, 10, 0, 0);
 		add(new JLabel("Registradores"), c);
 		c.insets = insets;
-		
+
 		c.gridwidth = 1;
 		for (int i = 0; i < 32; i++) {
 			c.gridx = (int) Math.floor(i / 8) * 2;
@@ -201,16 +246,16 @@ public class Desenhador extends JPanel {
 			registradores[i] = new JLabel();
 			add(registradores[i], c);
 		}
-		
+
 		setVisible(true);
 	}
-	
+
 	public void paint(Graphics g) {
 		super.paint(g);
-		
+
 		if (p.isFinished())
 			botaoProximo.setEnabled(false);
-		
+
 		for (int i = 0; i < 5; i++) {
 			InstrucaoWrapper inst = p.fases[i].getInstrucaoAtual();
 			if (inst == null)
@@ -218,10 +263,10 @@ public class Desenhador extends JPanel {
 			else
 				fases[i].setText(inst.getDesc());
 		}
-		
+
 		int clock = p.getClock();
 		int numInstConcluidas = p.instrucoesCompletadas.size();
-		float produtividade = clock > 0 ? (float)numInstConcluidas/clock : 0;
+		float produtividade = clock > 0 ? (float) numInstConcluidas / clock : 0;
 		this.clock.setText(String.valueOf(clock));
 		this.pc.setText(String.valueOf(p.getPc()));
 		this.numInstConcluidas.setText(String.valueOf(numInstConcluidas));
@@ -236,23 +281,25 @@ public class Desenhador extends JPanel {
 		this.regWrite.setText(String.valueOf(p.getSinal("regWrite")));
 		this.memToReg.setText(String.valueOf(p.getSinal("memToReg")));
 		this.pcScr.setText(String.valueOf(p.getSinal("pcScr")));
-		
+
 		for (int i = 0; i < 32; i++)
-			registradores[i].setText(String.valueOf(p.getRegistradores().readRegister(Integer.toBinaryString(i))));
-		
+			registradores[i].setText(String.valueOf(p.getRegistradores()
+					.readRegister(Integer.toBinaryString(i))));
+
 		Iterator<Integer> endRecentes = p.memoria.getUltimosEnderecos();
 		for (int i = 0; i < 4; i++) {
 			if (!endRecentes.hasNext())
 				break;
 			int mem = endRecentes.next();
 			this.endRecentes[i].setText(String.valueOf(mem));
-			this.valRecentes[i].setText(String.valueOf(p.memoria.getValue(mem)));
+			this.valRecentes[i]
+					.setText(String.valueOf(p.memoria.getValue(mem)));
 		}
 	}
-	
+
 	public void update() {
 		p.step();
-		
+
 		repaint();
 	}
 }

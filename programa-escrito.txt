@@ -1,4 +1,4 @@
-li R10,5
+li R10,30
 li R1,2
 li R2,1
 sw R0,24(R0)

@@ -20,7 +20,6 @@ import org.fases.MemoryAccess;
 import org.fases.RegisterDecoder;
 import org.fases.WriteBack;
 import org.instrucoes.InstrucaoWrapper;
-import org.instrucoes.Rtype.InstrucaoNop;
 import org.latches.LatchEXMEM;
 import org.latches.LatchIDEX;
 import org.latches.LatchIFID;
