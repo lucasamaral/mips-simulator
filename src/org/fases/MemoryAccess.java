@@ -78,6 +78,7 @@ public class MemoryAccess extends FasePadrao {
 		zeroULA = exMem.getZeroULA();
 		possivelProximoEndereco = exMem.getProximoEndereco();
 		resultadoULA = exMem.getResultadoULA();
+		processador.setSinal("pcScr",zeroULA && processador.getSinal("branch"));
 	}
 
 }

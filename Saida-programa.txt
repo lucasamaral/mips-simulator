@@ -1,20 +1,65 @@
-Numero de clocks: 16
+Numero de clocks: 74
 Instrucoes executadas:
+ADDI
+SW
+SW
+LW
+MUL
+LW
+ADD
+SW
+ADDI
+SW
+BLE
+LW
+MUL
+LW
+ADD
+SW
+ADDI
+SW
+BLE
+LW
+MUL
+LW
+ADD
+SW
+ADDI
+SW
+BLE
+LW
+MUL
+LW
+ADD
+SW
+ADDI
+SW
+BLE
+LW
+MUL
+LW
+ADD
+SW
+ADDI
+SW
+BLE
 
 Estado final da memoria:
+24 - 30
+28 - 5
 
 Estado final dos registradores:
 0 - 0
-1 - 0
+1 - 14
 2 - 0
 3 - 0
 4 - 0
 5 - 0
-6 - 0
-7 - 0
+6 - 5
+7 - 16
 8 - 0
-9 - 0
-10 - 0
+9 - 30
+10 - 4
 11 - 0
 12 - 0
 13 - 0

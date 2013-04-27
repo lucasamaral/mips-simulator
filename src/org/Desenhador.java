@@ -42,6 +42,7 @@ public class Desenhador extends JPanel {
 	
 	private JLabel regWrite = new JLabel();
 	private JLabel memToReg = new JLabel();
+	private JLabel pcScr = new JLabel();
 	
 	// Memoria recente usada
 	private JLabel[] endRecentes = new JLabel[4];
@@ -133,6 +134,8 @@ public class Desenhador extends JPanel {
 		add(new JLabel("ALUSrc"), c);
 		c.gridx = GridBagConstraints.RELATIVE;
 		add(ALUSrc, c);
+		add(new JLabel("PCSrc"), c);
+		add(pcScr, c);
 		
 		// Separador
 		c.insets = new Insets(10, 0, 0, 0);
@@ -232,6 +235,7 @@ public class Desenhador extends JPanel {
 		this.memWrite.setText(String.valueOf(p.getSinal("memWrite")));
 		this.regWrite.setText(String.valueOf(p.getSinal("regWrite")));
 		this.memToReg.setText(String.valueOf(p.getSinal("memToReg")));
+		this.pcScr.setText(String.valueOf(p.getSinal("pcScr")));
 		
 		for (int i = 0; i < 32; i++)
 			registradores[i].setText(String.valueOf(p.pegardosRegistradores(Integer.toBinaryString(i))));
