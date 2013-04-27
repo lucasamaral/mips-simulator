@@ -26,21 +26,21 @@ import org.latches.LatchMEMWB;
 
 public class Processador {
 
-	private CentralSinais centralSinais;
-	private int pc;
-	private Map<Integer, Integer> dependencias = new HashMap<>();
-	private MemoriaDados memoria;
-	private BancoDeRegistradores registradores;
-	private MemoriaInstrucoes instrucoes;
-	private int clockCount = 0;
-	private List<InstrucaoWrapper> instrucoesCompletadas = new LinkedList<>();
-	private LatchIFID ifId;
-	private LatchIDEX idEx;
-	private LatchEXMEM exMem;
-	private LatchMEMWB memWb;
-	private Fase[] fases;
-	private boolean fimDePrograma = false;
-	private boolean temDependencia;
+	protected CentralSinais centralSinais;
+	protected int pc;
+	protected Map<Integer, Integer> dependencias = new HashMap<>();
+	protected MemoriaDados memoria;
+	protected BancoDeRegistradores registradores;
+	protected MemoriaInstrucoes instrucoes;
+	protected int clockCount = 0;
+	protected List<InstrucaoWrapper> instrucoesCompletadas = new LinkedList<>();
+	protected LatchIFID ifId;
+	protected LatchIDEX idEx;
+	protected LatchEXMEM exMem;
+	protected LatchMEMWB memWb;
+	protected Fase[] fases;
+	protected boolean fimDePrograma = false;
+	protected boolean temDependencia;
 
 	public Processador(MemoriaDados mem, MemoriaInstrucoes ins) {
 		this.memoria = (mem);
