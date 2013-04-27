@@ -24,10 +24,10 @@ public class MemoriaDados {
 		try (Scanner scanner = new Scanner(path, ENCODING.name())) {
 			while (scanner.hasNextLine()) {
 				String dados = scanner.nextLine();
-				int valorx = Integer.parseInt(dados.substring(0	, 4).trim());
-				int valory = Integer.parseInt(dados.substring(5	, 9).trim());
-				setValue(5000+i, valory);
-				setValue(1000+i, valorx);
+				int valorx = Integer.parseInt(dados.substring(0, 4).trim());
+				int valory = Integer.parseInt(dados.substring(5, 9).trim());
+				setValue(5000 + i, valory);
+				setValue(1000 + i, valorx);
 				i++;
 			}
 		}

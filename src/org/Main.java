@@ -10,12 +10,17 @@ public class Main {
 
 	public static JPanel container;
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		String[] instrucoes = gerarAsInstrucoes();
 		MemoriaInstrucoes memIns = new MemoriaInstrucoes(instrucoes);
 		MemoriaDados mem = new MemoriaDados();
-		mem.carregarMemoria("dados_AXPY.dados");
-		Processador p = new ProcessadorBypassing(mem, memIns);
+		try {
+			mem.carregarMemoria("dados_AXPY.dados");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		Processador p = new Processador(mem, memIns);
 		p.initialStep();
 		inicializarInterface(p);
 		while(!p.isFinished()){
@@ -40,7 +45,9 @@ public class Main {
 	}
 
 	private static String[] gerarAsInstrucoes() {
-		return GeradorInstrucoesPrograma.gerarProgramadeArquivo("instrucoes.txt");
+		//return GeradorInstrucoesPrograma.gerarProgramadeArquivo("instrucoes.txt");
+		GeradorArquivoInstrucoes.gerarArquivo("programa.txt", "compilado.txt");
+		return GeradorInstrucoesPrograma.gerarProgramadeArquivo("compilado.txt");
 	}
 
 	private static JFrame criaFrame() {

@@ -266,5 +266,9 @@ public class Processador {
 	public boolean getSinal(String nome) {
 		return centralSinais.getSinal(nome);
 	}
+	
+	public BancoDeRegistradores getRegistradores(){
+		return registradores;
+	}
 
 }

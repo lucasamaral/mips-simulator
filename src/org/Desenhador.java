@@ -238,7 +238,7 @@ public class Desenhador extends JPanel {
 		this.pcScr.setText(String.valueOf(p.getSinal("pcScr")));
 		
 		for (int i = 0; i < 32; i++)
-			registradores[i].setText(String.valueOf(p.pegardosRegistradores(Integer.toBinaryString(i))));
+			registradores[i].setText(String.valueOf(p.getRegistradores().readRegister(Integer.toBinaryString(i))));
 		
 		Iterator<Integer> endRecentes = p.memoria.getUltimosEnderecos();
 		for (int i = 0; i < 4; i++) {
