@@ -40,7 +40,7 @@ public class Main {
 		container.add(d);
 		topFrame.add(container);
 		topFrame.pack();
-		topFrame.setSize(new Dimension(800, 700));
+		topFrame.setSize(new Dimension(900, 700));
 		topFrame.setVisible(true);
 	}
 

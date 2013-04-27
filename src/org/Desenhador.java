@@ -34,8 +34,13 @@ public class Desenhador extends JPanel {
 		@Override
 		public void run() {
 			iniciar();
+			int i = 0;
 			while (podeRodar && !p.isFinished()) {
 				p.step();
+				i++;
+				if (i % 10 == 0 && !p.isFinished()) {
+					update();
+				}
 			}
 		}
 
@@ -115,7 +120,7 @@ public class Desenhador extends JPanel {
 		});
 		add(botaoRodar, c);
 		botaoRodar.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				es.submit(rodador);
@@ -123,7 +128,7 @@ public class Desenhador extends JPanel {
 		});
 		add(botaoPausar, c);
 		botaoPausar.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				rodador.pausar();
@@ -299,7 +304,6 @@ public class Desenhador extends JPanel {
 
 	public void update() {
 		p.step();
-
 		repaint();
 	}
 }
