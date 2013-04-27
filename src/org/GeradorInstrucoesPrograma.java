@@ -5,6 +5,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -28,8 +29,8 @@ public class GeradorInstrucoesPrograma {
 				"00011100110010100000000000001100			; I11: ble R6,R10,12" };
 	}
 
-	public String[] gerarProgramadeArquivo(String endereco) {
-		List<String> linhas = new LinkedList<>();
+	public static String[] gerarProgramadeArquivo(String endereco) {
+		List<String> linhas = new ArrayList<>();
 		Path path = Paths.get(endereco);
 		try (Scanner scanner = new Scanner(path, ENCODING.name())) {
 			while (scanner.hasNextLine()) {
@@ -38,7 +39,12 @@ public class GeradorInstrucoesPrograma {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return (String[]) linhas.toArray();
+		String[] resultado = new String[linhas.size()];
+		int i=0;
+		for(String linha : linhas){
+			resultado[i++] = linha;
+		}
+		return resultado;
 	}
 
 }

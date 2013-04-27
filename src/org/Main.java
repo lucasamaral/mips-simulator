@@ -1,6 +1,7 @@
 package org;
 
 import java.awt.Dimension;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -9,10 +10,12 @@ public class Main {
 
 	public static JPanel container;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		String[] instrucoes = gerarAsInstrucoes();
 		MemoriaInstrucoes memIns = new MemoriaInstrucoes(instrucoes);
-		Processador p = new ProcessadorBypassing(new MemoriaDados(), memIns);
+		MemoriaDados mem = new MemoriaDados();
+		mem.carregarMemoria("dados_AXPY.dados");
+		Processador p = new ProcessadorBypassing(mem, memIns);
 		p.initialStep();
 		inicializarInterface(p);
 		while(!p.isFinished()){
@@ -37,7 +40,7 @@ public class Main {
 	}
 
 	private static String[] gerarAsInstrucoes() {
-		return GeradorInstrucoesPrograma.gerarProgramaPadrao();
+		return GeradorInstrucoesPrograma.gerarProgramadeArquivo("instrucoes.txt");
 	}
 
 	private static JFrame criaFrame() {
