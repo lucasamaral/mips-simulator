@@ -2,13 +2,14 @@ package org;
 
 import java.util.Deque;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
 
 public class MemoriaDados {
 
 	private HashMap<Integer, Integer> valores = new HashMap<>();
-	private Deque<Integer> ultimosEnderecosUtlizados = new LinkedList<>();
+	private Deque<Integer> ultimosEnderecosUtlizados = new LinkedList<Integer>();
 
 	public int getValue(int endereco) {
 		if (valores.containsKey(endereco))
@@ -23,6 +24,11 @@ public class MemoriaDados {
 
 	public Set<Integer> getEnderecosUtilizados() {
 		return valores.keySet();
+	}
+	
+	public Iterator<Integer> getUltimosEnderecos() {
+		return ultimosEnderecosUtlizados.descendingIterator();
+		
 	}
 
 }
