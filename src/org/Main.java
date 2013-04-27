@@ -14,12 +14,12 @@ public class Main {
 	public static void main(String[] args) {
 		String[] instrucoes = gerarAsInstrucoes();
 		MemoriaInstrucoes memIns = new MemoriaInstrucoes(instrucoes);
-		Processador p = new Processador(new MemoriaDados(), memIns);
+		Processador p = new ProcessadorBypassing(new MemoriaDados(), memIns);
 		inicializarInterface(p);
 		while(!p.isFinished()){
 			try {
 				p.step();
-				Thread.sleep(100);
+				Thread.sleep(10);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

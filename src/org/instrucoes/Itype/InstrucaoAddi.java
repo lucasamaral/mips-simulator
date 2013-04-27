@@ -36,9 +36,6 @@ public class InstrucaoAddi extends InstrucaoItype {
 	public int getResultadoULA(Processador proc) {
 		int soma = proc.pegardosRegistradores(rsCode)
 				+ Integer.parseInt(immCode, 2);
-		System.out.println("Dos registradores: "+proc.pegardosRegistradores(rsCode));
-		System.out.println("Do immediate: " + Integer.parseInt(immCode, 2));
-		System.out.println("Soma: "+soma);
 		return soma;
 	}
 

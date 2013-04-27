@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -29,7 +30,7 @@ public class Processador {
 
 	protected CentralSinais centralSinais;
 	protected int pc;
-	protected Map<Integer, Integer> dependencias = new HashMap<>();
+	protected Map<Integer, List<InstrucaoWrapper>> dependencias = new HashMap<>();
 	protected MemoriaDados memoria;
 	protected BancoDeRegistradores registradores;
 	protected MemoriaInstrucoes instrucoes;
@@ -42,6 +43,7 @@ public class Processador {
 	protected Fase[] fases;
 	protected boolean fimDePrograma = false;
 	protected boolean temDependencia;
+	protected Map<InstrucaoWrapper, Integer> dependenciasInstrucoes = new HashMap<>();
 
 	public Processador(MemoriaDados mem, MemoriaInstrucoes ins) {
 		this.memoria = (mem);
@@ -55,12 +57,12 @@ public class Processador {
 	public void adicionarInstrucaoCompletada(InstrucaoWrapper inst) {
 		if (inst != null)
 			instrucoesCompletadas.add(inst);
-		else{
+		else {
 			InstrucaoWrapper ins = new InstrucaoWrapper("");
 			ins.setInstrucaoReal(new InstrucaoNop("000000000000000000000000"));
 			instrucoesCompletadas.add(ins);
 		}
-		
+
 	}
 
 	private void construirLatches() {
@@ -81,8 +83,9 @@ public class Processador {
 	}
 
 	public void step() {
-		for (Integer registrador : dependencias.keySet()) {
-			dependencias.put(registrador, dependencias.get(registrador) - 1);
+		for (InstrucaoWrapper registrador : dependenciasInstrucoes.keySet()) {
+			dependenciasInstrucoes.put(registrador,
+					dependenciasInstrucoes.get(registrador) - 1);
 		}
 		for (Fase f : fases) {
 			f.carregarSinais();
@@ -133,13 +136,23 @@ public class Processador {
 
 	public boolean temDependencia(InstrucaoWrapper instrucaoAtual) {
 		for (Integer p : instrucaoAtual.getDependenciasRead()) {
-			if (dependencias.containsKey(p) && dependencias.get(p) > 0){
+			if (existeDependencia(p)) {
 				System.out.println("Opa, tem dependencia");
 				temDependencia = true;
 				return true;
 			}
 		}
 		temDependencia = false;
+		return false;
+	}
+
+	protected boolean existeDependencia(int end) {
+		if(dependencias.containsKey(end)){
+			for(InstrucaoWrapper ins : dependencias.get(end)){
+				if(dependenciasInstrucoes.get(ins)>0)
+					return true;
+			}
+		}
 		return false;
 	}
 
@@ -160,7 +173,7 @@ public class Processador {
 	}
 
 	public void incrementarPC() {
-		if(!temDependencia)
+		if (!temDependencia)
 			pc = pc + 4;
 		else
 			temDependencia = false;
@@ -170,7 +183,7 @@ public class Processador {
 		Charset encoding = StandardCharsets.UTF_8;
 		Path path = Paths.get("Saida-programa.txt");
 		try (BufferedWriter writer = Files.newBufferedWriter(path, encoding)) {
-			writer.write("Numero de clocks: "+clockCount);
+			writer.write("Numero de clocks: " + clockCount);
 			writer.newLine();
 			writer.write("Instrucoes executadas:");
 			writer.newLine();
@@ -202,22 +215,27 @@ public class Processador {
 	}
 
 	public void executarSalto(int proximoEndereco) {
+		dependenciasInstrucoes.remove(ifId.pegarInstrucao());
 		ifId.limpar();
+		dependenciasInstrucoes.remove(idEx.pegarInstrucao());
 		idEx.limpar();
+		dependenciasInstrucoes.remove(exMem.pegarInstrucao());
 		exMem.limpar();
 		setPc(proximoEndereco);
 	}
 
 	public void notificarEntrada(InstrucaoWrapper instrucaoAtual) {
+		instrucaoAtual.setClockEntrada(pc);
 		if (instrucaoAtual.getDependenciasWrite().size() > 0) {
-			switch (instrucaoAtual.getCodigo()) {
-			case LW:
+			if (!dependencias.containsKey(instrucaoAtual.getDependenciasWrite()
+					.get(0))) {
 				dependencias.put(instrucaoAtual.getDependenciasWrite().get(0),
-						4);
-			default:
-				dependencias.put(instrucaoAtual.getDependenciasWrite().get(0),
-						4);
+						new ArrayList<InstrucaoWrapper>());
 			}
+			dependencias.get(instrucaoAtual.getDependenciasWrite().get(0)).add(
+					instrucaoAtual);
+			dependenciasInstrucoes.put(instrucaoAtual, 4);
+
 		}
 	}
 

@@ -8,6 +8,7 @@ public class InstrucaoWrapper {
 
 	private String dado;
 	private Instrucao instrucao;
+	private int clockEntrada;
 	
 	public InstrucaoWrapper(String dado){
 		this.dado = dado;
@@ -65,5 +66,10 @@ public class InstrucaoWrapper {
 	
 	public List<Integer> getDependenciasRead() {
 		return instrucao.getDependenciasRead();
+	}
+
+	public void setClockEntrada(int pc) {
+		this.clockEntrada = pc;
+		
 	}
 }

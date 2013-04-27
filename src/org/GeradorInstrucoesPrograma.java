@@ -15,7 +15,7 @@ public class GeradorInstrucoesPrograma {
 	
 	public static String[] gerarProgramaPadrao() {
 		return new String[] {
-				"00100000000010100000000000000001 ;I1: addi R10,R0,100",
+				"00100000000010100000000000000100 ;I1: addi R10,R0,100",
 				"10101100000000000000000000011000			; I2: sw R0,24(R0)",
 				"10101100000000000000000000011100			; I3: sw R0,28(R0)",
 				"10001100000001100000000000011100			; I4: lw R6,28(R0)",

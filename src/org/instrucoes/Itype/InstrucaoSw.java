@@ -31,7 +31,7 @@ public class InstrucaoSw extends InstrucaoItype {
 	}
 
 	public void memory(int valor, Processador proc, LatchEXMEM exMem) {
-		proc.carregarNaMemoria(valor, exMem.getValorEscreverNaMemoria());
+		proc.carregarNaMemoria(valor, proc.pegardosRegistradores(rtCode));
 	}
 
 	@Override
