@@ -43,5 +43,13 @@ public class InstrucaoJmp extends Instrucao {
 	public List<Integer> getDependenciasRead() {
 		return new ArrayList<>();
 	}
+	
+	public boolean getALUOp1(){
+		return false;
+	}
+
+	public boolean getALUOp2(){
+		return false;
+	}
 
 }

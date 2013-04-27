@@ -28,16 +28,16 @@ public class Executer extends FasePadrao {
 	public void executarPasso2() {
 		if (instrucaoAtual != null
 				&& instrucaoAtual.getInstrucao().getNumeroClocks() == valorInicialDeClocks - 1) {
-			if (instrucaoAtual != null) {
-				exMem.adicionarInstrucao(instrucaoAtual);
-				exMem.setResultadoULA(instrucaoAtual
-						.getResultadoULA(processador));
-				exMem.setZeroULA(instrucaoAtual.getCondicaoULA(processador));
-				exMem.setEnderecoSomado(instrucaoAtual
-						.getResultadoULAEndereco(processador));
-				// Adicionado por Assis
-				exMem.setValorEscreverNaMemoria(valorLidoRtParaSalvarNaMemoria);
-			}
+			exMem.setResultadoULA(instrucaoAtual.getResultadoULA(processador));
+			exMem.setZeroULA(instrucaoAtual.getCondicaoULA(processador));
+			exMem.setEnderecoSomado(instrucaoAtual
+					.getResultadoULAEndereco(processador));
+			// Adicionado por Assis
+			exMem.setValorEscreverNaMemoria(valorLidoRtParaSalvarNaMemoria);
+		}
+		if (instrucaoAtual != null
+				&& instrucaoAtual.getInstrucao().getNumeroClocks() < 1) {
+			exMem.adicionarInstrucao(instrucaoAtual);
 			instrucaoAtual = null;
 		}
 	}
@@ -51,6 +51,37 @@ public class Executer extends FasePadrao {
 						.getNumeroClocks();
 			valorLidoRtParaSalvarNaMemoria = idEx
 					.getValorLidoRtParaSalvarNaMemoria();
+		}
+		if (instrucaoAtual != null) {
+			switch (instrucaoAtual.getType()) {
+			case RTYPE:
+				processador.setSinal("ALUOp1", true);
+				processador.setSinal("ALUOp2", false);
+				processador.setSinal("ALUSrc", false);
+				processador.setSinal("regDst", true);
+				break;
+			case ITYPE:
+				processador.setSinal("ALUSrc", true);
+				processador.setSinal("regDst", false);
+			default:
+				break;
+			}
+			switch (instrucaoAtual.getCodigo()) {
+			case LW:
+				processador.setSinal("ALUOp1", false);
+				processador.setSinal("ALUOp2", false);
+				break;
+			case SW:
+				processador.setSinal("ALUOp1", false);
+				processador.setSinal("ALUOp2", false);
+				break;
+			case BEQ:
+				processador.setSinal("ALUOp1", false);
+				processador.setSinal("ALUOp2", true);
+				break;
+			default:
+				break;
+			}
 		}
 	}
 

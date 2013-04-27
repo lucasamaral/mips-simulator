@@ -36,5 +36,13 @@ public abstract class InstrucaoRtype extends Instrucao {
 	public String getRdCode() {
 		return rdCode;
 	}
+	
+	public boolean getALUOp1(){
+		return true;
+	}
+
+	public boolean getALUOp2(){
+		return false;
+	}
 
 }

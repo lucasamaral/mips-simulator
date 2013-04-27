@@ -28,7 +28,7 @@ import org.latches.LatchMEMWB;
 
 public class Processador {
 
-	protected CentralSinais centralSinais;
+	protected CentralSinais centralSinais = new CentralSinais();
 	protected int pc;
 	protected Map<Integer, List<InstrucaoWrapper>> dependencias = new HashMap<>();
 	protected MemoriaDados memoria;
@@ -242,6 +242,11 @@ public class Processador {
 	}
 
 	public void initialStep() {
+		setSinal("ALUOp1", false);
+		setSinal("ALUOp2", false);
+		setSinal("ALUSrc", false);
+		setSinal("regDst", false);
+		setSinal("branch", false);
 		for (InstrucaoWrapper registrador : dependenciasInstrucoes.keySet()) {
 			dependenciasInstrucoes.put(registrador,
 					dependenciasInstrucoes.get(registrador) - 1);
@@ -251,4 +256,12 @@ public class Processador {
 		}
 	}
 
+	public void setSinal(String nome,boolean valor){
+		centralSinais.setSinal(nome, valor);
+	}
+	
+	public boolean getSinal(String nome){
+		return centralSinais.getSinal(nome);
+	}
+	
 }

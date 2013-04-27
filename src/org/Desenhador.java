@@ -79,15 +79,6 @@ public class Desenhador extends JPanel {
 		botaoRodar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				run = true;
-				while(run){
-					try {
-						Thread.sleep(300);
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					update();
-				}
 			}
 		});
 		add(botaoRodar, c);
@@ -140,6 +131,7 @@ public class Desenhador extends JPanel {
 		c.gridy++;
 		c.gridx = 4;
 		add(new JLabel("ALUSrc"), c);
+		c.gridx = GridBagConstraints.RELATIVE;
 		add(ALUSrc, c);
 		
 		// Separador
@@ -231,6 +223,15 @@ public class Desenhador extends JPanel {
 		this.pc.setText(String.valueOf(p.getPc()));
 		this.numInstConcluidas.setText(String.valueOf(numInstConcluidas));
 		this.produtividade.setText(String.format("%.5f", produtividade));
+		this.ALUOp1.setText(String.valueOf(p.getSinal("ALUOp1")));
+		this.ALUOp2.setText(String.valueOf(p.getSinal("ALUOp2")));
+		this.regDst.setText(String.valueOf(p.getSinal("regDst")));
+		this.ALUSrc.setText(String.valueOf(p.getSinal("ALUSrc")));
+		this.branch.setText(String.valueOf(p.getSinal("branch")));
+		this.memRead.setText(String.valueOf(true));
+		this.memWrite.setText(String.valueOf(true));
+		this.regWrite.setText(String.valueOf(true));
+		this.memToReg.setText(String.valueOf(true));
 		
 		for (int i = 0; i < 32; i++)
 			registradores[i].setText(String.valueOf(p.pegardosRegistradores(Integer.toBinaryString(i))));

@@ -44,4 +44,8 @@ public abstract class Instrucao {
 	public abstract List<Integer> getDependenciasWrite();
 
 	public abstract List<Integer> getDependenciasRead();
+
+	public abstract boolean getALUOp1();
+
+	public abstract boolean getALUOp2();
 }

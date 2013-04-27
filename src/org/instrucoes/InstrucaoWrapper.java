@@ -78,4 +78,13 @@ public class InstrucaoWrapper {
 		this.clockEntrada = pc;
 		
 	}
+
+	public boolean getALUOp1() {
+		return instrucao.getALUOp1();
+	}
+
+	public boolean getALUOp2() {
+		// TODO Auto-generated method stub
+		return instrucao.getALUOp2();
+	}
 }

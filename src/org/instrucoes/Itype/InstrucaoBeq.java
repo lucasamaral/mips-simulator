@@ -47,5 +47,13 @@ public class InstrucaoBeq extends InstrucaoItype {
 		lista.add(Integer.parseInt(rtCode, 2));
 		return lista;
 	}
+	
+	public boolean getALUOp1(){
+		return false;
+	}
+
+	public boolean getALUOp2(){
+		return true;
+	}
 
 }

@@ -54,6 +54,11 @@ public class MemoryAccess extends FasePadrao {
 	@Override
 	public void carregarSinais() {
 		instrucaoAtual = exMem.pegarInstrucao();
+		if(instrucaoAtual!=null){
+			processador.setSinal("branch", instrucaoAtual.isBranch());
+		}else{
+			processador.setSinal("branch", false);
+		}
 		zeroULA = exMem.getZeroULA();
 		possivelProximoEndereco = exMem.getProximoEndereco();
 		resultadoULA = exMem.getResultadoULA();

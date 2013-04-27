@@ -26,4 +26,12 @@ public abstract class InstrucaoItype extends Instrucao {
 	
 	@Override
 	public void writeBack(Processador banco,int valorULA, int valorMem) {}
+	
+	public boolean getALUOp1(){
+		return false;
+	}
+
+	public boolean getALUOp2(){
+		return false;
+	}
 }
