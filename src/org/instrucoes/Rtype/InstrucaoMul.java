@@ -12,6 +12,7 @@ public class InstrucaoMul extends InstrucaoRtype {
 	public InstrucaoMul(String entrada) {
 		super(entrada);
 		codigo = CodigoInstrucao.MUL;
+		numeroDeClocks = 2;
 	}
 
 	@Override

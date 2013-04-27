@@ -212,4 +212,8 @@ public class Processador {
 		}
 	}
 
+	public void naoIncrementarPc() {
+		temDependencia = true;
+	}
+
 }

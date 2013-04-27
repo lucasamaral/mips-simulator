@@ -43,7 +43,7 @@ public class Desenhador extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		int i=0;
-		while(i < 15 && !p.isFinished()){
+		while(i < 25 && !p.isFinished()){
 			p.step();
 			i++;
 		}

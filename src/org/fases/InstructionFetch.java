@@ -35,6 +35,10 @@ public class InstructionFetch extends FasePadrao {
 	}
 
 	public void executarPasso2() {
+		if(ifId.hasInstruction()){
+			processador.naoIncrementarPc();
+			return;
+		}
 		if (instrucaoAtual != null
 				&& !processador.temDependencia(instrucaoAtual)) {
 			processador.notificarEntrada(instrucaoAtual);
