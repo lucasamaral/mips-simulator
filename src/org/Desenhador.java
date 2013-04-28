@@ -42,6 +42,9 @@ public class Desenhador extends JPanel {
 					update();
 				}
 			}
+			if(!p.isFinished()){
+				update();
+			}
 		}
 
 		public void iniciar() {
