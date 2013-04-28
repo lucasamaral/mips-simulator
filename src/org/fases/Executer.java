@@ -28,10 +28,12 @@ public class Executer extends FasePadrao {
 	public void executarPasso2() {
 		if (instrucaoAtual != null
 				&& instrucaoAtual.getInstrucao().getNumeroClocks() == valorInicialDeClocks - 1) {
-			exMem.setResultadoULA(instrucaoAtual.getResultadoULA(processador));
-			exMem.setZeroULA(instrucaoAtual.getCondicaoULA(processador));
-			exMem.setEnderecoSomado(instrucaoAtual
-					.getResultadoULAEndereco(processador));
+			boolean zULA = instrucaoAtual.getCondicaoULA(processador);
+			int rULA = instrucaoAtual.getResultadoULA(processador);
+			int eULA = instrucaoAtual.getResultadoULAEndereco(processador);
+			exMem.setZeroULA(zULA);
+			exMem.setResultadoULA(rULA);
+			exMem.setEnderecoSomado(eULA);
 			// Adicionado por Assis
 			exMem.setValorEscreverNaMemoria(valorLidoRtParaSalvarNaMemoria);
 		}

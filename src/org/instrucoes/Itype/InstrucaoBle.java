@@ -26,6 +26,7 @@ public class InstrucaoBle extends InstrucaoItype {
 	public boolean getCondicaoULA(Processador proc) {
 		int rsValue = proc.pegardosRegistradores(rsCode);
 		int rtValue = proc.pegardosRegistradores(rtCode);
+		System.out.println(rsValue + " - " + rtValue);
 		return rsValue <= rtValue;
 	}
 
@@ -35,7 +36,7 @@ public class InstrucaoBle extends InstrucaoItype {
 		// o certo era ser relativo mesmo
 		return Integer.parseInt(immCode, 2);
 	}
-	
+
 	@Override
 	public List<Integer> getDependenciasWrite() {
 		List<Integer> lista = new ArrayList<>(3);

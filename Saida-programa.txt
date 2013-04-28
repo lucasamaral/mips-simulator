@@ -1,4 +1,4 @@
-Numero de clocks: 530
+Numero de clocks: 325
 Instrucoes executadas:
 ADDI
 ADDI

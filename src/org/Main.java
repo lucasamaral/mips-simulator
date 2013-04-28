@@ -20,7 +20,7 @@ public class Main {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		Processador p = new Processador(mem, memIns);
+		Processador p = new ProcessadorBypassing(mem, memIns);
 		p.initialStep();
 		inicializarInterface(p);
 		while(!p.isFinished()){
