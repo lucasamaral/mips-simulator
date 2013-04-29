@@ -15,13 +15,16 @@ public class Main {
 	public static void main(String[] args) {
 		final JFileChooser fc = new JFileChooser();
 		File file = null;
+		String[] instrucoes = null;
 		int returnVal = fc.showOpenDialog(criaFrame());
 
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             file = fc.getSelectedFile();
+            instrucoes = gerarAsInstrucoes(file.getPath());
         } else {
+        	instrucoes = gerarAsInstrucoes("programa-escrito.txt");
         }
-        String[] instrucoes = gerarAsInstrucoes(file.getPath());
+        
 		MemoriaInstrucoes memIns = new MemoriaInstrucoes(instrucoes);
 		MemoriaDados mem = new MemoriaDados();
 		try {

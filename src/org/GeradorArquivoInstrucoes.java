@@ -75,11 +75,22 @@ public class GeradorArquivoInstrucoes {
 	}
 
 	private static String gerarStringBinaria(String substring, int tamanho) {
-		String a = Integer.toBinaryString(Integer.parseInt(substring));
+		int valor = Integer.parseInt(substring);
+		if(valor >=0){
+			String a = Integer.toBinaryString(valor);
+			while (a.length() < tamanho) {
+				a = "0" + a;
+			}
+			return a;
+		}
+		int val = (int) Math.pow(2, tamanho);
+		System.out.println(val);
+		String a = Integer.toBinaryString(val+valor);
 		while (a.length() < tamanho) {
 			a = "0" + a;
 		}
 		return a;
+		
 	}
 
 	private static String processarRType(String code, String line) {

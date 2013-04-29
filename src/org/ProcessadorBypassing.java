@@ -57,8 +57,6 @@ public class ProcessadorBypassing extends Processador {
 		if (fases[3].getInstrucaoAtual() != null
 				&& fases[3].getInstrucaoAtual().getDependenciasWrite()
 						.contains(end)) {
-			if (end == 1)
-				System.out.println("AQUI - " + exMem.getResultadoULA());
 			return exMem.getResultadoULA();
 		}
 		if (fases[4].getInstrucaoAtual() != null
