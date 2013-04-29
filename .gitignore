@@ -8,3 +8,6 @@ bin/**
 *.war
 *.ear
 *~
+compilado.txt
+Saida-programa.txt
+
