@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Main {
@@ -17,7 +18,6 @@ public class Main {
 		File file = null;
 		String[] instrucoes = null;
 		int returnVal = fc.showOpenDialog(criaFrame());
-
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             file = fc.getSelectedFile();
             instrucoes = gerarAsInstrucoes(file.getPath());
@@ -33,7 +33,14 @@ public class Main {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		Processador p = new ProcessadorBypassing(mem, memIns);
+		Processador p = null;
+		int dialogButton = JOptionPane.YES_NO_OPTION;
+        int result = JOptionPane.showConfirmDialog (null, "Voce gostaria de usar o processador com bypassing?","Processador",dialogButton);
+        if(result == JOptionPane.YES_OPTION){
+        	p = new ProcessadorBypassing(mem, memIns);
+        }else{
+        	p = new Processador(mem, memIns);
+        }
 		p.initialStep();
 		inicializarInterface(p);
 		while(!p.isFinished()){
