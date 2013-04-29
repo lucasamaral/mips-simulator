@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -191,7 +192,9 @@ public class Processador {
 			writer.newLine();
 			writer.write("Estado final da memoria:");
 			writer.newLine();
-			for (int end : memoria.getEnderecosUtilizados()) {
+			Iterator<Integer> ite = memoria.getUltimosEnderecos();
+			while(ite.hasNext()){
+				int end = ite.next();
 				writer.write("" + end + " - " + memoria.getValue(end));
 				writer.newLine();
 			}

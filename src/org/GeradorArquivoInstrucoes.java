@@ -7,21 +7,28 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class GeradorArquivoInstrucoes {
 
 	final static Charset ENCODING = StandardCharsets.UTF_8;
+	private static int valor;
+	private static HashMap<String, Integer> labels = new HashMap<>();
 
 	public static void gerarArquivo(String enderecoEntrada, String enderecoSaida) {
 		Path pathEntrada = Paths.get(enderecoEntrada);
 		Path pathSaida = Paths.get(enderecoSaida);
+		valor = 0;
 		try (Scanner scanner = new Scanner(pathEntrada, ENCODING.name())) {
 			try (BufferedWriter writer = Files.newBufferedWriter(pathSaida,
 					ENCODING)) {
 				while (scanner.hasNextLine()) {
-					writer.write(processarLinha(scanner.nextLine()));
-					writer.newLine();
+					String a = processarLinha(scanner.nextLine());
+					if (a != null) {
+						writer.write(a);
+						writer.newLine();
+					}
 				}
 			}
 
@@ -31,6 +38,15 @@ public class GeradorArquivoInstrucoes {
 	}
 
 	private static String processarLinha(String line) {
+		if (line.indexOf(":") != -1) {
+			String label = line.substring(0, line.indexOf(":"));
+			labels.put(label, valor);
+			line = line.substring(line.indexOf(":")+1);
+		}
+		if(line.length()==0){
+			return null;
+		}
+		valor+=4;
 		if (line.indexOf(";") != -1)
 			line = line.split(";")[0];
 		String content = line.split(" ")[1];
@@ -75,7 +91,7 @@ public class GeradorArquivoInstrucoes {
 
 	private static String gerarStringBinaria(String substring, int tamanho) {
 		int valor = Integer.parseInt(substring);
-		if(valor >=0){
+		if (valor >= 0) {
 			String a = Integer.toBinaryString(valor);
 			while (a.length() < tamanho) {
 				a = "0" + a;
@@ -83,12 +99,12 @@ public class GeradorArquivoInstrucoes {
 			return a;
 		}
 		int val = (int) Math.pow(2, tamanho);
-		String a = Integer.toBinaryString(val+valor);
+		String a = Integer.toBinaryString(val + valor);
 		while (a.length() < tamanho) {
 			a = "0" + a;
 		}
 		return a;
-		
+
 	}
 
 	private static String processarRType(String code, String line) {
@@ -152,14 +168,14 @@ public class GeradorArquivoInstrucoes {
 		String code = "000111";
 		String[] content = line.split(",");
 		return code + reg(content[0]) + reg(content[1])
-				+ gerarStringBinaria(content[2], 16);
+				+ gerarStringBinaria(Integer.toString(labels.get(content[2])), 16);
 	}
 
 	private static String processarBNE(String line) {
 		String code = "000100";
 		String[] content = line.split(",");
 		return code + reg(content[0]) + reg(content[1])
-				+ gerarStringBinaria(content[2], 16);
+				+ gerarStringBinaria(Integer.toString(labels.get(content[2])-valor+4), 16);
 	}
 
 	private static String processarJMP(String line) {
