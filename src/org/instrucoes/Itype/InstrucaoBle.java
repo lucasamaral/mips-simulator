@@ -26,7 +26,6 @@ public class InstrucaoBle extends InstrucaoItype {
 	public boolean getCondicaoULA(Processador proc) {
 		int rsValue = proc.pegardosRegistradores(rsCode);
 		int rtValue = proc.pegardosRegistradores(rtCode);
-		System.out.println(rsValue + " - " + rtValue);
 		return rsValue <= rtValue;
 	}
 

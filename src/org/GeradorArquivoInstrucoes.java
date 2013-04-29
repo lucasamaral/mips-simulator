@@ -81,7 +81,6 @@ public class GeradorArquivoInstrucoes {
 		default:
 			break;
 		}
-		System.out.println(line);
 		return null;
 	}
 
