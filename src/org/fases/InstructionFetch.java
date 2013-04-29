@@ -25,7 +25,7 @@ public class InstructionFetch extends FasePadrao {
 		} catch (ArrayIndexOutOfBoundsException e) {
 			return;
 		}
-		instrucaoAtual = new InstrucaoWrapper(dadosInstrucao);
+		instrucaoAtual = new InstrucaoWrapper(dadosInstrucao,internalPc);
 		instrucaoAtual.setInstrucaoReal(ConversorInstrucoes
 				.converterInstrucao(instrucaoAtual.getDado()));
 	}

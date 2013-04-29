@@ -31,7 +31,7 @@ public class InstrucaoBle extends InstrucaoItype {
 	}
 
 	@Override
-	public int getResultadoULAEndereco(Processador proc) {
+	public int getResultadoULAEndereco(int pcAtual, Processador proc) {
 		// Temporariamente mudando para seguir a documentacao do PA. Eu acho que
 		// o certo era ser relativo mesmo
 		return analisarString(immCode);

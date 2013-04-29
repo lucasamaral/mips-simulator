@@ -13,6 +13,7 @@ public class InstrucaoJmp extends Instrucao {
 	public InstrucaoJmp(String entrada) {
 		super(entrada);
 		codigo = CodigoInstrucao.JMP;
+		tipo = TipoInstrucao.JTYPE;
 		immCode = dados.substring(16, 32);
 	}
 
@@ -30,7 +31,7 @@ public class InstrucaoJmp extends Instrucao {
 	}
 
 	@Override
-	public int getResultadoULAEndereco(Processador proc) {
+	public int getResultadoULAEndereco(int pcAtual, Processador proc) {
 		return Integer.parseInt(immCode, 2);
 	}
 
@@ -50,6 +51,11 @@ public class InstrucaoJmp extends Instrucao {
 
 	public boolean getALUOp2(){
 		return false;
+	}
+
+	@Override
+	public boolean isBranch() {
+		return true;
 	}
 
 }

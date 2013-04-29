@@ -218,6 +218,7 @@ public class Processador {
 		idEx.limpar();
 		dependenciasInstrucoes.remove(exMem.pegarInstrucao());
 		exMem.limpar();
+		System.out.println(proximoEndereco);
 		setPc(proximoEndereco);
 	}
 

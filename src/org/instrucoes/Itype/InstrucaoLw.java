@@ -32,7 +32,7 @@ public class InstrucaoLw extends InstrucaoItype {
 	}
 
 	@Override
-	public int getResultadoULAEndereco(Processador proc) {
+	public int getResultadoULAEndereco(int pcAtual,Processador proc) {
 		return 0;
 	}
 	

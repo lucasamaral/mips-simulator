@@ -29,11 +29,6 @@ public class InstrucaoNop extends InstrucaoRtype {
 	}
 
 	@Override
-	public int getResultadoULAEndereco(Processador proc) {
-		return 0;
-	}
-
-	@Override
 	public List<Integer> getDependenciasWrite() {
 		List<Integer> lista = new ArrayList<>(3);
 		return lista;

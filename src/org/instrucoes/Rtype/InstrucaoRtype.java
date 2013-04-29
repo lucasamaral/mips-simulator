@@ -45,4 +45,9 @@ public abstract class InstrucaoRtype extends Instrucao {
 		return false;
 	}
 
+	@Override
+	public int getResultadoULAEndereco(int pc,Processador p){
+		return 0;
+	}
+	
 }

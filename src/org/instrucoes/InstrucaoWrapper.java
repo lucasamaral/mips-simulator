@@ -9,8 +9,10 @@ public class InstrucaoWrapper {
 	private String dado;
 	private Instrucao instrucao;
 	private int clockEntrada;
+	private int pcEntrada;
 	
-	public InstrucaoWrapper(String dado){
+	public InstrucaoWrapper(String dado, int pc){
+		pcEntrada = pc;
 		this.dado = dado;
 	}
 
@@ -63,7 +65,7 @@ public class InstrucaoWrapper {
 	}
 
 	public int getResultadoULAEndereco(Processador proc) {
-		return instrucao.getResultadoULAEndereco(proc);
+		return instrucao.getResultadoULAEndereco(pcEntrada,proc);
 	}
 
 	public List<Integer> getDependenciasWrite() {

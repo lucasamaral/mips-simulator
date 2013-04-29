@@ -27,11 +27,6 @@ public class InstrucaoMul extends InstrucaoRtype {
 	public boolean getCondicaoULA(Processador proc) {
 		return false;
 	}
-
-	@Override
-	public int getResultadoULAEndereco(Processador proc) {
-		return 0;
-	}
 	
 	@Override
 	public List<Integer> getDependenciasWrite() {

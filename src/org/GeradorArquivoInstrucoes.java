@@ -31,7 +31,6 @@ public class GeradorArquivoInstrucoes {
 	}
 
 	private static String processarLinha(String line) {
-		System.out.println(line);
 		if (line.indexOf(";") != -1)
 			line = line.split(";")[0];
 		String content = line.split(" ")[1];
@@ -84,7 +83,6 @@ public class GeradorArquivoInstrucoes {
 			return a;
 		}
 		int val = (int) Math.pow(2, tamanho);
-		System.out.println(val);
 		String a = Integer.toBinaryString(val+valor);
 		while (a.length() < tamanho) {
 			a = "0" + a;
@@ -165,7 +163,7 @@ public class GeradorArquivoInstrucoes {
 	}
 
 	private static String processarJMP(String line) {
-		return "000010" + gerarStringBinaria(line, 24);
+		return "000010" + gerarStringBinaria(line, 26);
 	}
 
 	private static String processarNOP(String line) {

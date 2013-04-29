@@ -26,14 +26,14 @@ public class InstrucaoBne extends InstrucaoItype {
 	public boolean getCondicaoULA(Processador proc) {
 		int rsValue = proc.pegardosRegistradores(rsCode);
 		int rtValue = proc.pegardosRegistradores(rtCode);
-		return rsValue!=rtValue;
+		return rsValue != rtValue;
 	}
 
 	@Override
-	public int getResultadoULAEndereco(Processador proc) {
-		return proc.getPc() + 4 + analisarString(immCode);
+	public int getResultadoULAEndereco(int pcAtual, Processador proc) {
+		return pcAtual +analisarString(immCode);
 	}
-	
+
 	@Override
 	public List<Integer> getDependenciasWrite() {
 		List<Integer> lista = new ArrayList<>(3);

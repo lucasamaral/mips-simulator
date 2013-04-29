@@ -30,8 +30,8 @@ public class InstrucaoBeq extends InstrucaoItype {
 	}
 
 	@Override
-	public int getResultadoULAEndereco(Processador proc) {
-		return proc.getPc() + 4 + analisarString(immCode);
+	public int getResultadoULAEndereco(int pcAtual, Processador proc) {
+		return pcAtual + 4 + analisarString(immCode);
 	}
 
 	@Override

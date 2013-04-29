@@ -38,7 +38,7 @@ public abstract class Instrucao {
 		if(complemento2.charAt(0)=='0'){
 			return Integer.parseInt(complemento2, 2);
 		} else {
-			return (int)Math.pow(2, 16)-Integer.parseInt(complemento2.substring(1),2);
+			return -(int)Math.pow(2, 15)+Integer.parseInt(complemento2.substring(1),2);
 		}
 	}
 	
@@ -47,7 +47,7 @@ public abstract class Instrucao {
 
 	public abstract boolean getCondicaoULA(Processador proc);
 
-	public abstract int getResultadoULAEndereco(Processador proc);
+	public abstract int getResultadoULAEndereco(int pc, Processador proc);
 
 	public abstract List<Integer> getDependenciasWrite();
 

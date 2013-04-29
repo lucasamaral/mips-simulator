@@ -1,5 +1,5 @@
-li R10,30
-li R1,2
+li R10,5
+li R1,1
 li R2,1
 sw R0,24(R0)
 sw R2,28(R0)
@@ -9,4 +9,4 @@ add R8,R7,R6
 sw R7,24(R0)
 sw R8,28(R0)
 addi R1,R1,1
-ble R1,R10,20
+bne R1,R10,-24
