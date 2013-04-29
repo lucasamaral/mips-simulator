@@ -1,8 +1,10 @@
 package org;
 
 import java.awt.Dimension;
+import java.io.File;
 import java.io.IOException;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -11,7 +13,15 @@ public class Main {
 	public static JPanel container;
 
 	public static void main(String[] args) {
-		String[] instrucoes = gerarAsInstrucoes();
+		final JFileChooser fc = new JFileChooser();
+		File file = null;
+		int returnVal = fc.showOpenDialog(criaFrame());
+
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            file = fc.getSelectedFile();
+        } else {
+        }
+        String[] instrucoes = gerarAsInstrucoes(file.getPath());
 		MemoriaInstrucoes memIns = new MemoriaInstrucoes(instrucoes);
 		MemoriaDados mem = new MemoriaDados();
 		try {
@@ -44,9 +54,8 @@ public class Main {
 		topFrame.setVisible(true);
 	}
 
-	private static String[] gerarAsInstrucoes() {
-		//return GeradorInstrucoesPrograma.gerarProgramadeArquivo("instrucoes.txt");
-		GeradorArquivoInstrucoes.gerarArquivo("programa-escrito.txt", "compilado.txt");
+	private static String[] gerarAsInstrucoes(String filename) {
+		GeradorArquivoInstrucoes.gerarArquivo(filename, "compilado.txt");
 		return GeradorInstrucoesPrograma.gerarProgramadeArquivo("compilado.txt");
 	}
 
