@@ -137,7 +137,6 @@ public class Desenhador extends JPanel {
 				rodador.pausar();
 			}
 		});
-		add(botaoAbrir, c);
 
 		c.anchor = GridBagConstraints.WEST;
 
