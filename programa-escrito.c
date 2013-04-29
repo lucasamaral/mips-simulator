@@ -1,7 +1,7 @@
 #include <stdio.h>
-int main(int argc, char const *argv[])
+int main()
 {
-	int n = 10;
+	int n = 5;
 	int i = 1;
 	int calc = 0;
 	int val = 1;
@@ -13,6 +13,6 @@ int main(int argc, char const *argv[])
 		val = calc;
 		i++;
 	} while (i != n);
-
+	printf("%d",val);
 	return 0;
 }

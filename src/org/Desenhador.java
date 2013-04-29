@@ -57,14 +57,10 @@ public class Desenhador extends JPanel {
 
 	}
 
-	// Controle do programa
-	private boolean run = false;
-
 	// Botoes de controle
 	private JButton botaoProximo = new JButton("Próximo");
 	private JButton botaoRodar = new JButton("Rodar");
 	private JButton botaoPausar = new JButton("Pausar");
-	private JButton botaoAbrir = new JButton("Abrir");
 
 	// Id. de instruções
 	private JLabel[] fases = new JLabel[5];
@@ -111,14 +107,12 @@ public class Desenhador extends JPanel {
 		c.gridwidth = 2;
 		botaoProximo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				run = false;
 				update();
 			}
 		});
 		add(botaoProximo, c);
 		botaoRodar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				run = true;
 			}
 		});
 		add(botaoRodar, c);

@@ -3,7 +3,6 @@ package org.instrucoes.Itype;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.BancoDeRegistradores;
 import org.Processador;
 import org.instrucoes.CodigoInstrucao;
 
