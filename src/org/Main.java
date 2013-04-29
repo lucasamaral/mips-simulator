@@ -22,13 +22,13 @@ public class Main {
             file = fc.getSelectedFile();
             instrucoes = gerarAsInstrucoes(file.getPath());
         } else {
-        	instrucoes = gerarAsInstrucoes(Main.class.getResource("../programa-escrito.txt").getPath());
+        	instrucoes = gerarAsInstrucoes("programa-escrito.txt");
         }
         
 		MemoriaInstrucoes memIns = new MemoriaInstrucoes(instrucoes);
 		MemoriaDados mem = new MemoriaDados();
 		try {
-			mem.carregarMemoria(Main.class.getResource("../dados_AXPY.dados").getPath());
+			mem.carregarMemoria("dados_AXPY.dados");
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
