@@ -31,7 +31,7 @@ public class InstrucaoBeq extends InstrucaoItype {
 
 	@Override
 	public int getResultadoULAEndereco(Processador proc) {
-		return proc.getPc() + 4 + Integer.parseInt(immCode, 2);
+		return proc.getPc() + 4 + analisarString(immCode);
 	}
 
 	@Override

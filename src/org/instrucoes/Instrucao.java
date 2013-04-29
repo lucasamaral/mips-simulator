@@ -34,6 +34,14 @@ public abstract class Instrucao {
 		return false;
 	}
 	
+	public Integer analisarString(String complemento2){
+		if(complemento2.charAt(0)=='0'){
+			return Integer.parseInt(complemento2, 2);
+		} else {
+			return (int)Math.pow(2, 16)-Integer.parseInt(complemento2.substring(1),2);
+		}
+	}
+	
 	
 	public abstract int getResultadoULA(Processador proc);
 

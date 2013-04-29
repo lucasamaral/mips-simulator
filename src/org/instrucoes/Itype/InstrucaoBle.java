@@ -34,7 +34,7 @@ public class InstrucaoBle extends InstrucaoItype {
 	public int getResultadoULAEndereco(Processador proc) {
 		// Temporariamente mudando para seguir a documentacao do PA. Eu acho que
 		// o certo era ser relativo mesmo
-		return Integer.parseInt(immCode, 2);
+		return analisarString(immCode);
 	}
 
 	@Override
